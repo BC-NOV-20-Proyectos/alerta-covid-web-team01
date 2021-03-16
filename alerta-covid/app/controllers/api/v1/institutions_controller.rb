@@ -4,57 +4,45 @@ class Api::V1::InstitutionsController < ApplicationController
   
     # GET api/v1/institutions or /institutions.json
     def index
-      institutions = Institution.all
-      render json: {status: 200, data: institutions} 
+      @institutions = Institution.all
+      render json: @institutions, status: :ok
     end
   
     # GET api/v1/institutions/1 or /institutions/1.json
     def show
-      render json: {status: 200, data: @institution}
+      render json: @institution, status: :ok
     end
   
     # POST api/v1/institutions or /institutions.json
     def create
-      begin
-        @institution = Institution.new(institution_params)
-    
-        if @institution.save
-          render json: {status: 200, data: @institution }
-        else
-          render json: {msg: @institution.errors, status: 500}
-        end 
-      rescue
-        render json: {msg: :server_error, status: 500}
-      end
+      @institution = Institution.new(institution_params)
+
+      if @institution.savew
+        render json: @institution, status: :created
+      else
+        render json: @institution.errors, status: :unprocessable_entity
+      end 
     end
   
     # PATCH/PUT api/v1/institutions/1 or /institutions/1.json
     def update
-      begin
-        if @institution.update(institution_params)
-          render json: {status: 200, location: @institution }
-        else
-          render json: {msg: @institution.errors, status: 500}
-        end
-      rescue
-        render json: {msg: :server_error, status: 500}
+      if @institution.update(institution_params)
+        render json: @institution, status: :ok
+      else
+        render json: @institution.errors, status: :unprocessable_entity
       end
     end
   
     # DELETE api/v1/institutions/1 or /institutions/1.json
     def destroy
       @institution.destroy
-      render json: {status: 200, data: @institution }
+      render json: @institution, status: :ok
     end
   
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_institution
-        begin
-          @institution = Institution.find(params[:id])
-        rescue
-          render json: {msg: :not_found, status: 404}
-        end
+        @institution = Institution.find(params[:id])
       end
   
       # Only allow a list of trusted parameters through.
