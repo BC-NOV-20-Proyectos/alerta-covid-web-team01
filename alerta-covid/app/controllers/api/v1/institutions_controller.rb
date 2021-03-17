@@ -17,7 +17,7 @@ class Api::V1::InstitutionsController < ApplicationController
     def create
       @institution = Institution.new(institution_params)
 
-      if @institution.savew
+      if @institution.save
         render json: @institution, status: :created
       else
         render json: @institution.errors, status: :unprocessable_entity
