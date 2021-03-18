@@ -1,4 +1,4 @@
-class Api::V1::InstitutionsController < ApiController
+class Api::V1::InstitutionsController < Api::V1::ApiController
     before_action :set_institution, only: %i[ show edit update destroy ]
     skip_before_action :verify_authenticity_token
   
