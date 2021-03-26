@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/faker-ruby/faker.git
-  revision: 677ac8fd96213a188a5512cf3aa78c89f1fcda91
+  revision: 64baa405dfa127b0cb4cfbe1dd0724bab571f78a
   branch: master
   specs:
-    faker (2.16.0)
+    faker (2.17.0)
       i18n (>= 1.6, < 2)
 
 GEM
@@ -295,4 +295,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   2.2.7
+   2.2.15
