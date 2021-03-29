@@ -24,3 +24,4 @@ symptoms = [
   }
   
   puts "#{Symptom.count} of #{symptoms.size} symptoms created"
+  
