@@ -1,4 +1,4 @@
-class Api::V1::SymptomsController < Api::V1::ApiController
+class Api::V1::CovidTestsController < Api::V1::ApiController
   skip_before_action :verify_authenticity_token
   def index
     covid_tests = CovidTest.all
