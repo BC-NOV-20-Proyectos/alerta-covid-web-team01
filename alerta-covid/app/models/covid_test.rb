@@ -1,0 +1,2 @@
+class CovidTest < ApplicationRecord
+end

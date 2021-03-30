@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :covid_tests
   namespace :api do
     namespace :v1 do
       resources :institutions, except: [:new, :edit]
