@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :covid_test do
-    name { "MyString" }
+    name { "Rapid Blood Test" }
   end
 end

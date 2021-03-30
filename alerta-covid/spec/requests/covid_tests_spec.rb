@@ -16,115 +16,12 @@ RSpec.describe "/covid_tests", type: :request do
   
   # CovidTest. As you add validations to CovidTest, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
 
   describe "GET /index" do
     it "renders a successful response" do
       CovidTest.create! valid_attributes
       get covid_tests_url
       expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      covid_test = CovidTest.create! valid_attributes
-      get covid_test_url(covid_test)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_covid_test_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "render a successful response" do
-      covid_test = CovidTest.create! valid_attributes
-      get edit_covid_test_url(covid_test)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new CovidTest" do
-        expect {
-          post covid_tests_url, params: { covid_test: valid_attributes }
-        }.to change(CovidTest, :count).by(1)
-      end
-
-      it "redirects to the created covid_test" do
-        post covid_tests_url, params: { covid_test: valid_attributes }
-        expect(response).to redirect_to(covid_test_url(CovidTest.last))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "does not create a new CovidTest" do
-        expect {
-          post covid_tests_url, params: { covid_test: invalid_attributes }
-        }.to change(CovidTest, :count).by(0)
-      end
-
-      it "renders a successful response (i.e. to display the 'new' template)" do
-        post covid_tests_url, params: { covid_test: invalid_attributes }
-        expect(response).to be_successful
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested covid_test" do
-        covid_test = CovidTest.create! valid_attributes
-        patch covid_test_url(covid_test), params: { covid_test: new_attributes }
-        covid_test.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the covid_test" do
-        covid_test = CovidTest.create! valid_attributes
-        patch covid_test_url(covid_test), params: { covid_test: new_attributes }
-        covid_test.reload
-        expect(response).to redirect_to(covid_test_url(covid_test))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a successful response (i.e. to display the 'edit' template)" do
-        covid_test = CovidTest.create! valid_attributes
-        patch covid_test_url(covid_test), params: { covid_test: invalid_attributes }
-        expect(response).to be_successful
-      end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested covid_test" do
-      covid_test = CovidTest.create! valid_attributes
-      expect {
-        delete covid_test_url(covid_test)
-      }.to change(CovidTest, :count).by(-1)
-    end
-
-    it "redirects to the covid_tests list" do
-      covid_test = CovidTest.create! valid_attributes
-      delete covid_test_url(covid_test)
-      expect(response).to redirect_to(covid_tests_url)
     end
   end
 end
