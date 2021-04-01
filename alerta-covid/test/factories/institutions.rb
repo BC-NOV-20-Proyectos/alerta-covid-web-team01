@@ -1,5 +1,6 @@
-FactoryBot.define do
-  factory :institution do
-    name { "MyString" }
-  end
-end
+
+#FactoryBot.define do
+#  factory :institution do
+#    name { "MyString" }
+#  end
+#end
