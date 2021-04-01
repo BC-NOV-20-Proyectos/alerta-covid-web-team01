@@ -3,7 +3,6 @@
 RSpec.describe "/areas", type: :request do
 
   let(:valid_attributes) {
-
     {id:2,institution_id: 1, name: "demo"}
   }
 
