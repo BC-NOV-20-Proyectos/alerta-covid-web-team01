@@ -1,22 +1,23 @@
  require 'rails_helper'
 
 RSpec.describe "/areas", type: :request do
+
   let(:valid_attributes) {
-    {name: "demo"}
+
+    {id:2,institution_id: 1, name: "demo"}
   }
 
   let(:invalid_attributes) {
-    {name: ""}
+    {id:"",institution_id: "",name: ""}
   }
 
   before(:each) do
-    FactoryBot.create(:institution, id:1, name: "institution")
-    FactoryBot.create(:area, id:1, institution_id: 1 ,name: "area")
+    @institution = FactoryBot.create(:institution, id:1, name: "institution")
+    @area = FactoryBot.create(:area, id:1, institution_id: 1 ,name: "area")
   end
 
   describe "GET /index" do
     it "renders a successful response" do
-      Area.create! valid_attributes
       get areas_url
       expect(response).to be_successful
     end
@@ -24,8 +25,7 @@ RSpec.describe "/areas", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      area = Area.create! valid_attributes
-      get area_url(area)
+      get area_url(@area)
       expect(response).to be_successful
     end
   end
@@ -39,8 +39,7 @@ RSpec.describe "/areas", type: :request do
 
   describe "GET /edit" do
     it "render a successful response" do
-      area = Area.create! valid_attributes
-      get edit_area_url(area)
+      get edit_area_url(@area)
       expect(response).to be_successful
     end
   end
@@ -68,7 +67,7 @@ RSpec.describe "/areas", type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post areas_url, params: { area: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
@@ -98,7 +97,7 @@ RSpec.describe "/areas", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         area = Area.create! valid_attributes
         patch area_url(area), params: { area: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
