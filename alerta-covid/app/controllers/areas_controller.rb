@@ -22,38 +22,26 @@ class AreasController < ApplicationController
   # POST /areas or /areas.json
   def create
     @area = Area.new(area_params)
-
-    respond_to do |format|
-      if @area.save
-        format.html { redirect_to @area, notice: "Area was successfully created." }
-        format.json { render :show, status: :created, location: @area }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @area.errors, status: :unprocessable_entity }
-      end
+    if @area.save
+      redirect_to @area, notice: "Area was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /areas/1 or /areas/1.json
   def update
-    respond_to do |format|
-      if @area.update(area_params)
-        format.html { redirect_to @area, notice: "Area was successfully updated." }
-        format.json { render :show, status: :ok, location: @area }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @area.errors, status: :unprocessable_entity }
-      end
+    if @area.update(area_params)
+      redirect_to @area, notice: "Area was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /areas/1 or /areas/1.json
   def destroy
     @area.destroy
-    respond_to do |format|
-      format.html { redirect_to areas_url, notice: "Area was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to areas_url, notice: "Area was successfully destroyed."
   end
 
   private
