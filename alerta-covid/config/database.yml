@@ -9,14 +9,14 @@ default: &default
 
 development:
   <<: *default
-  database: reloj_checador_development
+  database: alerta_covid_development
 
 test:
   <<: *default
-  database: reloj_checador_test
+  database: alerta_covid_test
 
 production:
   <<: *default
-  database: reloj_checador_production
-  username: registros
-  password: <%= ENV['REGISTROS_DATABASE_PASSWORD'] %>
+  database: alerta_covid_production
+  username: alerta_covid
+  password: <%= ENV['ALERTA_COVID_DATABASE_PASSWORD'] %>
