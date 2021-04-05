@@ -10,7 +10,7 @@ RSpec.describe "api/v1/institutions", type: :request do
   }
 
   before(:each) do
-    FactoryBot.create(:institution, id: 1 ,name: "fmat")
+    FactoryBot.create(:institution, id: 2 ,name: "fmat")
   end
 
   describe "GET /index" do
@@ -22,7 +22,7 @@ RSpec.describe "api/v1/institutions", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-        get "/api/v1/institutions/1"
+        get "/api/v1/institutions/2"
         expect(response).to have_http_status(:ok)
     end
   end
@@ -50,14 +50,14 @@ RSpec.describe "api/v1/institutions", type: :request do
       }
 
       it "updates the requested institution" do
-        patch "/api/v1/institutions/1", params: { institution: new_attributes }
+        patch "/api/v1/institutions/2", params: { institution: new_attributes }
         expect(response).to have_http_status(:ok)
       end
     end
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        patch "/api/v1/institutions/1", params: { institution: invalid_attributes}
+        patch "/api/v1/institutions/2", params: { institution: invalid_attributes}
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
@@ -65,7 +65,7 @@ RSpec.describe "api/v1/institutions", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested institution" do
-        delete "/api/v1/institutions/1"
+        delete "/api/v1/institutions/2"
         expect(response).to have_http_status(:ok)
     end
   end
