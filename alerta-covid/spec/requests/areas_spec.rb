@@ -2,14 +2,9 @@
 
 RSpec.describe "/areas", type: :request do
 
-  let(:valid_attributes) {
+  let(:valid_attributes) { { id:2,institution_id: 1, name: "demo" } }
 
-    {id:2,institution_id: 1, name: "demo"}
-  }
-
-  let(:invalid_attributes) {
-    {id:"",institution_id: "",name: ""}
-  }
+  let(:invalid_attributes) { { id:"",institution_id: "",name: "" } }
 
   before(:each) do
     @institution = FactoryBot.create(:institution, id:1, name: "institution")

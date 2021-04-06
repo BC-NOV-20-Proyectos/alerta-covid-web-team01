@@ -1,13 +1,9 @@
  require 'rails_helper'
 
 RSpec.describe "/areas", type: :request do
-  let(:valid_attributes) {
-    {name: "demo"}
-  }
+  let(:valid_attributes) { { name: "demo" } }
 
-  let(:invalid_attributes) {
-    {name: ""}
-  }
+  let(:invalid_attributes) { { name: "" } }
 
   before(:each) do
     FactoryBot.create(:institution, id:1, name: "institution")
