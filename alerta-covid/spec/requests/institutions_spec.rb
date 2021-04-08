@@ -1,17 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "/institutions", type: :request do
-  let(:valid_attributes) {
-    {name: "demo"}
-  }
-
-  let(:invalid_attributes) {
-    {name: ""}
-  }
+  let!(:institution) { FactoryBot.create(:institution) }
+  let(:valid_attributes) { {name: "New institution"} }
+  let(:invalid_attributes) { {name: nil} }
 
   describe "GET /index" do
     it "renders a successful response" do
-      Institution.create! valid_attributes
       get institutions_url
       expect(response).to be_successful
     end
@@ -19,7 +14,6 @@ RSpec.describe "/institutions", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      institution = Institution.create! valid_attributes
       get institution_url(institution)
       expect(response).to be_successful
     end
@@ -34,7 +28,6 @@ RSpec.describe "/institutions", type: :request do
 
   describe "GET /edit" do
     it "render a successful response" do
-      institution = Institution.create! valid_attributes
       get edit_institution_url(institution)
       expect(response).to be_successful
     end
@@ -70,19 +63,15 @@ RSpec.describe "/institutions", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        {name: "new name"}
-      }
+      let(:new_attributes) { {name: "new name"} }
 
       it "updates the requested institution" do
-        institution = Institution.create! valid_attributes
         patch institution_url(institution), params: { institution: new_attributes }
         institution.reload
         expect(response).to have_http_status(:found)
       end
 
       it "redirects to the institution" do
-        institution = Institution.create! valid_attributes
         patch institution_url(institution), params: { institution: new_attributes }
         institution.reload
         expect(response).to redirect_to(institution_url(institution))
@@ -91,7 +80,6 @@ RSpec.describe "/institutions", type: :request do
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        institution = Institution.create! valid_attributes
         patch institution_url(institution), params: { institution: invalid_attributes }
         institution.reload  
         expect(response).to have_http_status(:unprocessable_entity)
@@ -101,14 +89,12 @@ RSpec.describe "/institutions", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested institution" do
-      institution = Institution.create! valid_attributes
       expect {
         delete institution_url(institution)
       }.to change(Institution, :count).by(-1)
     end
 
     it "redirects to the institutions list" do
-      institution = Institution.create! valid_attributes
       delete institution_url(institution)
       expect(response).to redirect_to(institutions_url)
     end
