@@ -2,8 +2,8 @@
 
 RSpec.describe "/areas", type: :request do
   
-  let!(:institution) { FactoryBot.create(:institution) }
-  let!(:area) { FactoryBot.create(:area, institution_id: institution.id) }
+  let!(:institution) { create(:institution) }
+  let!(:area) { create(:area, institution_id: institution.id) }
   let(:valid_attributes) { { institution_id: institution.id, name: "test area" } }
   let(:invalid_attributes) { { institution_id: nil, name: nil } }
 

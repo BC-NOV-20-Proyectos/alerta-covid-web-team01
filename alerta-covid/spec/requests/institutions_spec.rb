@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "/institutions", type: :request do
-  let!(:institution) { FactoryBot.create(:institution) }
+  let!(:institution) { create(:institution) }
   let(:valid_attributes) { {name: "New institution"} }
   let(:invalid_attributes) { {name: nil} }
 
