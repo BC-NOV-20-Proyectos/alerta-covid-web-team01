@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :institutions, except: [:new, :edit]
+      resources :institutions, only: [:index]
       resources :covid_tests, only: [:index]
       resources :symptoms, only: [:index]
       resources :areas, only: [:index]
