@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :institutions, except: [:new, :edit]
       resources :covid_tests, only: [:index]
       resources :symptoms, only: [:index]
+      resources :areas, only: [:index]
     end
   end
   
