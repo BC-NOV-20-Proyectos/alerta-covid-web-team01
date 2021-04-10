@@ -25,35 +25,26 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if @place.save
-        format.html { redirect_to @place, notice: "Place was successfully created." }
-        format.json { render :show, status: :created, location: @place }
+        redirect_to @place, notice: "Place was successfully created."
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @place.errors, status: :unprocessable_entity }
+        render :new, status: :unprocessable_entity
       end
     end
   end
 
   # PATCH/PUT /places/1 or /places/1.json
   def update
-    respond_to do |format|
-      if @place.update(place_params)
-        format.html { redirect_to @place, notice: "Place was successfully updated." }
-        format.json { render :show, status: :ok, location: @place }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @place.errors, status: :unprocessable_entity }
-      end
+    if @place.update(place_params)
+      redirect_to @place, notice: "Place was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /places/1 or /places/1.json
   def destroy
     @place.destroy
-    respond_to do |format|
-      format.html { redirect_to places_url, notice: "Place was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to places_url, notice: "Place was successfully destroyed."
   end
 
   private
