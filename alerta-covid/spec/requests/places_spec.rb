@@ -14,15 +14,10 @@
 
 RSpec.describe "/places", type: :request do
   
-  # Place. As you add validations to Place, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  let!(:area) { create(:area) }
+  let!(:place) { create(:place, area_id: area.id) }
+  let(:valid_attributes) { { name: "Test Place", area_id: area.id } }
+  let(:invalid_attributes) { { name: nil, area_id: nil } }
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -78,7 +73,7 @@ RSpec.describe "/places", type: :request do
 
       it "renders a successful response (i.e. to display the 'new' template)" do
         post places_url, params: { place: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
@@ -86,14 +81,14 @@ RSpec.describe "/places", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {name: "New Place", area_id: area.id}
       }
 
       it "updates the requested place" do
         place = Place.create! valid_attributes
         patch place_url(place), params: { place: new_attributes }
         place.reload
-        skip("Add assertions for updated state")
+        expect(response).to have_http_status(:found)
       end
 
       it "redirects to the place" do
@@ -108,7 +103,7 @@ RSpec.describe "/places", type: :request do
       it "renders a successful response (i.e. to display the 'edit' template)" do
         place = Place.create! valid_attributes
         patch place_url(place), params: { place: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).to have_http_status(:unprocessable_entity)
       end
     end
   end
