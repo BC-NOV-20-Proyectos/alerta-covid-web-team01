@@ -1,35 +1,46 @@
-<p id='notice'><%= notice %></p>
+<!--p id='notice'><%#= notice %></p-->
 
-<h1>Users</h1>
+<div class='container'>
 
-<table>
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Confirmed</th>
-      <th>Role</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
+  <h1 class="mt-2">Users</h1>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-        <td><%= user.confirmed_at.present? ? 'Confirmed' : 'Unconfirmed' %></td>
-        <td>No Role</td>
-        <td>No Actions</td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <div class='table-responsive mt-4'>
+    <table class='table table-hover'>
+      <thead class='thead-light'>
+        <tr>
+          <th>Email</th>
+          <th>Confirmed</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.confirmed_at.present? ? 'Confirmed' : 'Unconfirmed' %></td>
+            <td>No Role</td>
+            <td>No Actions</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 <br>
 
 <%= form_with(model: @user) do |form| %>
     <div class='form-group'>
-        <label for=''>Email</label>
-        <%= form.text_field :email, class: 'form-control', rows:'1', max: '25' %>
-    </div>
-    <%= form.submit%>
+      <div class='container'>
+        <div class='col-md-6 ml-n3'>
+          <label for=''>Email</label>
+          <%= form.text_field :email, class: 'form-control', rows:'1', max: '25' %>
+        </div>
+        
+
+        <%= form.submit 'Create User', class: 'btn btn-md btn-primary mt-2'%>
+      </div>
+    </div>    
 <% end %>
