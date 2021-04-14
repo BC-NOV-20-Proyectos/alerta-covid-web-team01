@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_224655) do
+ActiveRecord::Schema.define(version: 2021_04_10_040055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2021_04_09_224655) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "places", force: :cascade do |t|
+    t.string "name"
+    t.string "qr_code"
+    t.bigint "area_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_places_on_area_id"
+  end
+
   create_table "symptoms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -50,5 +59,6 @@ ActiveRecord::Schema.define(version: 2021_04_09_224655) do
   end
 
   add_foreign_key "areas", "institutions"
+  add_foreign_key "places", "areas"
   add_foreign_key "departaments", "institutions"
 end
