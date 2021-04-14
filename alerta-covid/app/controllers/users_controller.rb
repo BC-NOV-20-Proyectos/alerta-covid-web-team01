@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
 
     def index
-        @users = User.all
+        @users = User.all.includes(:role)
         @user  = User.new
+        @roles = Role.all
     end
 
     def create
@@ -19,6 +20,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:email)
+        params.require(:user).permit(:email, :role_id)
     end
 end

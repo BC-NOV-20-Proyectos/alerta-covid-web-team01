@@ -1,0 +1,27 @@
+<div class='container'>
+
+  <h1 class="mt-2">Super Admin: Listing Roles</h1>
+
+  <div class='table-responsive mt-4'>
+    <table class='table table-hover'>
+      <thead class='thead-light'>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @roles.each do |role| %>
+          <tr>
+            <td><%= role.name %></td>
+            <td>
+                <a href="<%= edit_role_path(role) %>" class="btn btn-sm btn-info">Edit</a>
+                <a href="<%= role_path(role) %>" class="btn btn-sm btn-warning">Show</a>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
