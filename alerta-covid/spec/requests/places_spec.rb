@@ -21,7 +21,6 @@ RSpec.describe "/places", type: :request do
 
   describe "GET /index" do
     it "renders a successful response" do
-      Place.create! valid_attributes
       get places_url
       expect(response).to be_successful
     end
@@ -29,7 +28,6 @@ RSpec.describe "/places", type: :request do
 
   describe "GET /show" do
     it "renders a successful response" do
-      place = Place.create! valid_attributes
       get place_url(place)
       expect(response).to be_successful
     end
@@ -44,7 +42,6 @@ RSpec.describe "/places", type: :request do
 
   describe "GET /edit" do
     it "render a successful response" do
-      place = Place.create! valid_attributes
       get edit_place_url(place)
       expect(response).to be_successful
     end
@@ -85,14 +82,12 @@ RSpec.describe "/places", type: :request do
       }
 
       it "updates the requested place" do
-        place = Place.create! valid_attributes
         patch place_url(place), params: { place: new_attributes }
         place.reload
         expect(response).to have_http_status(:found)
       end
 
       it "redirects to the place" do
-        place = Place.create! valid_attributes
         patch place_url(place), params: { place: new_attributes }
         place.reload
         expect(response).to redirect_to(place_url(place))
@@ -101,7 +96,6 @@ RSpec.describe "/places", type: :request do
 
     context "with invalid parameters" do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        place = Place.create! valid_attributes
         patch place_url(place), params: { place: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -110,14 +104,12 @@ RSpec.describe "/places", type: :request do
 
   describe "DELETE /destroy" do
     it "destroys the requested place" do
-      place = Place.create! valid_attributes
       expect {
         delete place_url(place)
       }.to change(Place, :count).by(-1)
     end
 
     it "redirects to the places list" do
-      place = Place.create! valid_attributes
       delete place_url(place)
       expect(response).to redirect_to(places_url)
     end
