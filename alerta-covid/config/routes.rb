@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :covid_tests, only: [:index]
       resources :symptoms, only: [:index]
       resources :areas, only: [:index]
+      resources :places, only: [:index]
       resources :departaments, only: [:index]
     end
   end
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   resources :institutions
   resources :symptoms
   resources :areas
+  resources :places
   resources :departaments
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
