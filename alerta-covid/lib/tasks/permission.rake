@@ -1,4 +1,4 @@
-namespace 'permissions' do
+namespace 'permission' do
     desc "Loading all models and their methods in permissions table."
     task(:permissions => :environment) do
         arr = []
@@ -62,7 +62,8 @@ def eval_cancan_action(action)
 end
 
 def write_permission(modell, cancan_action, name)
-    permission  = Permission.find(:first, :conditions => ["subject_class = ? and action = ?", modell, cancan_action])
+    permission = Permission.where(subject_class: modell, action: cancan_action).first 
+    # Permission.find(:first, :conditions => ["subject_class = ? and action = ?", modell, cancan_action])
     unless permission
         permission = Permission.new
         permission.name = name
