@@ -16,7 +16,7 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
     #we dont want the Drawing permissions to be displayed.
     #this way u can display only selected models. you can choose which methods u want to display too.
-    @permissions = Permission.all.map{|i| i if (["Part"].include? i.subject_class) }.compact
+    @permissions = Permission.all.map{|i| i if (["all"].exclude? i.subject_class) }.compact
     @role_permissions = @role.permissions.collect{|p| p.id}
   end
 
@@ -27,7 +27,7 @@ class RolesController < ApplicationController
     if @role.save
       redirect_to roles_path and return
     end
-    @permissions = Permission.all.map{|i| i if (["Part"].include? i.subject_class) }.compact
+    @permissions = Permission.all.map{|i| i if (["all"].exclude? i.subject_class) }.compact
     render 'edit'
   end
 

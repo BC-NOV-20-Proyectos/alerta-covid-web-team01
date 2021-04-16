@@ -17,4 +17,6 @@
     <% end %>
     <%= yield %>
   </body>
+  <%= flash_msg.html_safe if flash.any? %>
+  <% flash.discard(flash_msg) %>
 </html>
