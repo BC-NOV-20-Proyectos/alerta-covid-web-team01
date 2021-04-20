@@ -8,6 +8,7 @@ class PlacesController < ApplicationController
 
   # GET /places/1 or /places/1.json
   def show
+    Place.generate_qr_code(params[:id])
   end
 
   # GET /places/new
