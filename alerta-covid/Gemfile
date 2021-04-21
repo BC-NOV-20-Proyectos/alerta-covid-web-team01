@@ -31,6 +31,7 @@ gem 'figaro'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 gem 'jwt'
+gem 'rqrcode'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
