@@ -16,6 +16,6 @@ class Place < ApplicationRecord
       resize_gte_to: false,
       size: 120
     )
-    IO.binwrite("app/assets/images/qrcode.png", png.to_s)
+    IO.binwrite("app/assets/images/qrcode_#{place_id}.png", png.to_s)
   end
 end
