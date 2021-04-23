@@ -1,0 +1,41 @@
+<%= form_with(model: incidence) do |form| %>
+  <% if incidence.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(incidence.errors.count, "error") %> prohibited this incidence from being saved:</h2>
+
+      <ul>
+        <% incidence.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <h1>Do you have Symptom</h1>
+    <% @symptoms.each do |s| %>        
+      <%= check_box_tag 'symp[]', s.id%>
+      <%=s.name%>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :result%>
+    <%= select(:incidence, :result,[[true,true],[false, false]])%>
+  </div>
+
+
+  <div>
+    <%= form.label :delivery%>
+    <%= form.text_field :delivery, type: "date"%>
+  </div>
+
+  <div>
+    <%= form.label :covid_test%>
+    <%= select(:incidence, :covid_test_id, @tests) %>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
