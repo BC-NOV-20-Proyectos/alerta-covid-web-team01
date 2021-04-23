@@ -14,27 +14,31 @@
   <div>
     <h1>Do you have Symptom</h1>
     <% @symptoms.each do |s| %>        
-      <%= check_box_tag 'symp[]', s.id%>
+      <%= check_box_tag 'symp[]', s.id, @user_symptoms.include?(s.id)%>
       <%=s.name%>
     <% end %>
-  </div>
-
-  <div>
-    <%= form.label :result%>
-    <%= select(:incidence, :result,[[true,true],[false, false]])%>
-  </div>
-
-
-  <div>
-    <%= form.label :delivery%>
-    <%= form.text_field :delivery, type: "date"%>
   </div>
 
   <div>
     <%= form.label :covid_test%>
     <%= select(:incidence, :covid_test_id, @tests) %>
   </div>
+
+  <div>
+    <%= form.label :begin_covid_test%>
+    <%= form.text_field :begin_covid_test, type: "date"%>
+  </div>
+
+  <div>
+    <%= form.label :delivery_covid_test%>
+    <%= form.text_field :delivery, type: "date"%>
+  </div>
+
   
+  <div>
+    <%= form.label :result_covid_test%>
+    <%= select(:incidence, :result,[[true,true],[false, false]])%>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

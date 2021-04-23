@@ -1,6 +1,7 @@
 class IncidencesController < ApplicationController
   before_action :set_incidence, only: %i[show edit update destroy]
-  before_action :set_variables, only: %i[new edit  create]
+  before_action :set_variables, only: %i[new edit create update]
+  before_action :set_user_symptoms, only: %i[new edit create update]
 
   # GET /incidences or /incidences.json
   def index
@@ -17,13 +18,16 @@ class IncidencesController < ApplicationController
   end
 
   # GET /incidences/1/edit
-  def edit; end
+  def edit
+    @user_symptoms = @incidence.symptoms.collect{|p|p.id}
+  end
 
   # POST /incidences or /incidences.json
   def create
     @incidence = Incidence.new(incidence_params)
     @incidence.user = current_user
-    @incidence.open = Date.today
+    @incidence.open = DateTime.now()
+    @incidence.set_symptoms(params[:symp]) if params[:symp]
     if @incidence.save
       redirect_to @incidence, notice: 'Incidence was successfully created.'
     else
@@ -33,12 +37,12 @@ class IncidencesController < ApplicationController
 
   # PATCH/PUT /incidences/1 or /incidences/1.json
   def update
-    respond_to do |_format|
-      if @incidence.update(incidence_params)
-        redirect_to @incidence, notice: 'Incidence was successfully updated.'
-      else
-        render :edit, status: :unprocessable_entity
-      end
+    @incidence.set_symptoms(params[:symp]) if params[:symp]
+
+    if @incidence.update(incidence_params)
+      redirect_to @incidence, notice: 'Incidence was successfully updated.'
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -57,5 +61,9 @@ class IncidencesController < ApplicationController
   def set_variables
     @tests = CovidTest.all.map { |test| [test.name, test.id] }
     @symptoms = Symptom.all
+  end
+
+  def set_user_symptoms
+    @user_symptoms = []
   end
 end
