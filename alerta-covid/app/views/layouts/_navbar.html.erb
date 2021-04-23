@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">ALERTA COVID</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" id="users_li">
+                <a class="nav-link" href="<%= users_path %>">USERS</a>
+            </li>
+            <li class="nav-item" id="roles_li">
+                <a class="nav-link" href="<%= roles_path %>">ROLES</a>
+            </li>            
+            <li class="nav-item" id="companies_li">
+                <a class="nav-link" href="#">COMPANIES <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" id="employees_li">
+                <a class="nav-link" href="#">EMPLOYEES</a>
+            </li>
+            <li class="nav-item dropdown" id="reports_li">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                REPORTS
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Attendance by day</a>
+                <a class="dropdown-item" href="#">Average time employees checked in/out by month</a>
+                <a class="dropdown-item" href="#">Absence report by day</a>
+                <a class="dropdown-item" href="#">Absence report by month</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav mr-md-1">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <%= current_user&.email %>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<%= edit_registration_path(current_user) %>">Edit Profile</a>
+                    <%= button_to "Log Out", destroy_session_path(current_user), method: :delete, class: "dropdown-item"%>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div style="display: none">
+    <input type="hidden" readonly="true" value="<%= controller.controller_name %>" id="controller_name">
+</div>

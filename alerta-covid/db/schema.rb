@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_10_040055) do
+ActiveRecord::Schema.define(version: 2021_04_15_160517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,22 @@ ActiveRecord::Schema.define(version: 2021_04_10_040055) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.string "subject_class"
+    t.string "action"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.text "description"
+  end
+
+  create_table "permissions_roles", force: :cascade do |t|
+    t.integer "permission_id"
+    t.integer "role_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "places", force: :cascade do |t|
     t.string "name"
     t.string "qr_code"
@@ -52,13 +68,42 @@ ActiveRecord::Schema.define(version: 2021_04_10_040055) do
     t.index ["area_id"], name: "index_places_on_area_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "symptoms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "full_name"
+    t.string "lastname"
+    t.date "born_date"
+    t.string "gender"
+    t.bigint "role_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
+  end
+
   add_foreign_key "areas", "institutions"
-  add_foreign_key "places", "areas"
   add_foreign_key "departaments", "institutions"
+  add_foreign_key "places", "areas"
+  add_foreign_key "users", "roles"
 end

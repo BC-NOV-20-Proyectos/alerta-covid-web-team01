@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :roles
+  devise_for :users, controllers: { sessions: "users/sessions",
+                                    registrations: 'users/registrations',
+                                    passwords: "users/passwords",
+                                    confirmations: "users/confirmations" }
   namespace :api do
     namespace :v1 do
       resources :institutions, only: [:index]
@@ -19,5 +24,10 @@ Rails.application.routes.draw do
   resources :areas
   resources :places
   resources :departaments
+
+  scope :admin do
+    resources :users
+  end
+  # Ex:- scope :active, -> {where(:active => true)}
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
