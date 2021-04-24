@@ -26,20 +26,10 @@
 
   <div>
     <%= form.label :begin_covid_test%>
-    <%= form.text_field :begin_covid_test, type: "date"%>
-  </div>
-
-  <div>
-    <%= form.label :delivery_covid_test%>
-    <%= form.text_field :delivery, type: "date"%>
-  </div>
-
-  
-  <div>
-    <%= form.label :result_covid_test%>
-    <%= select(:incidence, :result,[[true,true],[false, false]])%>
+    <%= form.date_field :begin %>
   </div>
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>

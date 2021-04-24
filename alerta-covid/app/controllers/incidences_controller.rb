@@ -20,6 +20,7 @@ class IncidencesController < ApplicationController
   # GET /incidences/1/edit
   def edit
     @user_symptoms = @incidence.symptoms.collect{|p|p.id}
+    @user_places = @incidence.places.collect{|p| p.id}
   end
 
   # POST /incidences or /incidences.json
@@ -27,7 +28,7 @@ class IncidencesController < ApplicationController
     @incidence = Incidence.new(incidence_params)
     @incidence.user = current_user
     @incidence.open = DateTime.now()
-    @incidence.set_symptoms(params[:symp]) if params[:symp]
+    set_variables_with_params()
     if @incidence.save
       redirect_to @incidence, notice: 'Incidence was successfully created.'
     else
@@ -37,9 +38,9 @@ class IncidencesController < ApplicationController
 
   # PATCH/PUT /incidences/1 or /incidences/1.json
   def update
-    @incidence.set_symptoms(params[:symp]) if params[:symp]
-
-    if @incidence.update(incidence_params)
+    set_variables_with_params()
+    
+    if @incidence.update(incidence_params_update)
       redirect_to @incidence, notice: 'Incidence was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
@@ -55,15 +56,27 @@ class IncidencesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def incidence_params
-    params.require(:incidence).permit(:result, :delivery, :covid_test_id, :user_id)
+    params.require(:incidence).permit(:covid_test_id, :user_id, :begin)
+  end
+
+  def incidence_params_update
+    params.require(:incidence).permit(:delivery, :result)
   end
 
   def set_variables
     @tests = CovidTest.all.map { |test| [test.name, test.id] }
     @symptoms = Symptom.all
+    @places = Place.all
+  end
+
+  def set_variables_with_params
+    puts("desde set params #{params.require(:incidence).inspect}")
+    @incidence.set_symptoms(params[:symp]) if params[:symp]
+    @incidence.set_places(params[:places]) if params[:places]
   end
 
   def set_user_symptoms
     @user_symptoms = []
+    @user_places = []
   end
 end

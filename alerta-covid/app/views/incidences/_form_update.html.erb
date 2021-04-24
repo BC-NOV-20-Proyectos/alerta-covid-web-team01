@@ -1,0 +1,53 @@
+<%= form_with(model: incidence) do |form| %>
+  <% if incidence.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(incidence.errors.count, "error") %> prohibited this incidence from being saved:</h2>
+
+      <ul>
+        <% incidence.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <h1>Do you have Symptom</h1>
+    <% @symptoms.each do |s| %>        
+      <%= check_box_tag 'symp[]', s.id, @user_symptoms.include?(s.id), disabled: true%>
+      <%=s.name%>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :covid_test%>
+    <%= select(:incidence, :covid_test_id, @tests, {}, disabled: true ) %>
+  </div>
+
+  <div>
+    <%= form.label :begin_covid_test%>
+    <%= form.date_field :begin, disabled: true%>
+  </div>
+
+  <div>
+    <%= form.label :delivery_covid_test%>
+    <%= form.date_field :delivery %>
+  </div>
+
+  <div>
+    <%= form.label :result_covid_test%>
+    <%= form.select(:result,[[true,true],[false, false]],{},{id: "select"})%>
+  </div>
+  <div id="places">
+    <h1>Add all the places visited in the last 10 days</h1>
+    <% @places.each do |s| %>        
+      <%= check_box_tag 'places[]', s.id, @user_places.include?(s.id),{array: true, class: "check_box", enabled: true}%>
+      <%=s.name%>
+    <% end %>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %> 
