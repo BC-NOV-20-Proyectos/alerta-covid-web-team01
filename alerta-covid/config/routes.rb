@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         resources :areas, only: [:index]
         resources :places, only: [:index]
         resources :departaments, only: [:index]
+        resources :incidences, only: [:index, :create, :update]
       end
     end
     
