@@ -1,15 +1,16 @@
 class PlacesController < ApplicationController
   before_action :set_place, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :get_areas, only: %i[ new edit]
 
   # GET /places or /places.json
   def index
-    @places = Place.all
+    @places = Place.all.includes(:area)
   end
 
   # GET /places/1 or /places/1.json
   def show
-    Place.generate_qr_code(params[:id])
+    
   end
 
   # GET /places/new
@@ -24,7 +25,6 @@ class PlacesController < ApplicationController
   # POST /places or /places.json
   def create
     @place = Place.new(place_params)
-
     if @place.save
       redirect_to @place, notice: "Place was successfully created."
     else
@@ -56,5 +56,9 @@ class PlacesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def place_params
       params.require(:place).permit(:name, :qr_code, :area_id)
+    end
+
+    def get_areas
+      @areas=Area.all
     end
 end

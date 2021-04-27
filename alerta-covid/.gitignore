@@ -38,3 +38,5 @@ yarn-debug.log*
 
 #Ignore file
 /config/application.yml
+/app/assets/images/qr_codes/*
+!/app/assets/images/qr_codes/.gitkeep
