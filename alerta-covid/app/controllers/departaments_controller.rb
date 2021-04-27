@@ -1,9 +1,10 @@
 class DepartamentsController < ApplicationController
   before_action :set_departament, only: %i[ show edit update destroy ]
+  before_action :get_institutions, only: %i[ new edit]
 
   # GET /departaments or /departaments.json
   def index
-    @departaments = Departament.all
+    @departaments = Departament.all.includes(:institution)
   end
 
   # GET /departaments/1 or /departaments/1.json
@@ -53,5 +54,9 @@ class DepartamentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def departament_params
       params.require(:departament).permit(:institution_id, :name)
+    end
+
+    def get_institutions
+      @institutions=Institution.all
     end
 end
