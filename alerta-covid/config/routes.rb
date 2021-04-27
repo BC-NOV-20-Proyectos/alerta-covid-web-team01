@@ -13,6 +13,8 @@ Rails.application.routes.draw do
         resources :areas, only: [:index]
         resources :places, only: [:index]
         resources :departaments, only: [:index]
+        get 'reports/places'
+        get 'reports/users'
       end
     end
     
@@ -25,6 +27,8 @@ Rails.application.routes.draw do
     resources :places
     resources :departaments
     resources :incidences, except: [:destroy]
+    get 'reports/places'
+    get 'reports/users'
     
   scope :admin do
     resources :users
