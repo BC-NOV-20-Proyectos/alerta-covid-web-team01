@@ -18,7 +18,7 @@ class Api::V1::IncidencesController < Api::V1::ApiController
   def update
     set_variables_with_params()
     if @incidence.update(incidence_params_update)
-      render json: @post, status: :ok
+      render json: @incidence, status: :ok
     else
       rrender json: { error: e.message }, status: :unprocessable_entity
     end
