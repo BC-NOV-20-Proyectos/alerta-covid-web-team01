@@ -13,9 +13,9 @@ class ReportsController < ApplicationController
     start = params[:start] if params[:start]
     finish = params[:finish] if params[:finish]
     if(commit == "all")
-      Incidence.all.where(result: true)
+      Incidence.all
     else
-      Incidence.all.where(result: true, open: start..finish)
+      Incidence.all.where(open: start..finish)
     end
   end
 end 
