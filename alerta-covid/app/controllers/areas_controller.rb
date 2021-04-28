@@ -1,9 +1,10 @@
 class AreasController < ApplicationController
   before_action :set_area, only: %i[ show edit update destroy ]
+  before_action :get_institutions, only: %i[ new edit]
 
   # GET /areas or /areas.json
   def index
-    @areas = Area.all
+    @areas = Area.all.includes(:institution)
   end
 
   # GET /areas/1 or /areas/1.json
@@ -53,5 +54,9 @@ class AreasController < ApplicationController
     # Only allow a list of trusted parameters through.
     def area_params
       params.require(:area).permit(:institution_id, :name)
+    end
+
+    def get_institutions
+      @institutions=Institution.all
     end
 end

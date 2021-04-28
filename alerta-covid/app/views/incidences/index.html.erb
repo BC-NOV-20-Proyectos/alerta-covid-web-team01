@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Incidences</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>type test</th>
+      <th>Open</th>
+      <th>Result</th>
+      <th>Close</th>
+      <th>Symptom</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @incidences.each do |incidence| %>
+      <tr>
+        <td><%= incidence.covid_test.name%></td>
+        <td><%= time_ago_in_words(incidence.open)%></td>
+        <td><%= incidence.result ? incidence.result : "Pending"%></td>
+        <td><%= incidence.close ? time_ago_in_words(incidence.close) : "Pending"%></td>
+        <td><%= incidence.has_symptoms%></td>
+        <td><%= link_to 'Show', incidence %></td>
+        <td><%= link_to 'Edit', edit_incidence_path(incidence) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Incidence', new_incidence_path %>

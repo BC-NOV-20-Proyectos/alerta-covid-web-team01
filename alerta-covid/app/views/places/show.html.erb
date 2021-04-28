@@ -11,13 +11,14 @@
 </p>
 
 <p>
-  <%= image_tag("qrcode_#{@place.id}.png") %>
+  <%= image_tag("qr_codes/qrcode_#{@place.id}.png") %>
 </p>
 
 <p>
   <strong>Area:</strong>
-  <%= @place.area_id %>
+  <%= @place.area.name %>
 </p>
-
-<%= link_to 'Edit', edit_place_path(@place) %> |
+<% if user_signed_in? %>
+<%= link_to 'Edit', edit_place_path(@place) %> 
+<% end %>
 <%= link_to 'Back', places_path %>

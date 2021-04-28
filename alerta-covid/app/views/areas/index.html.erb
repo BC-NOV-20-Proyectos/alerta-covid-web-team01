@@ -14,7 +14,7 @@
   <tbody>
     <% @areas.each do |area| %>
       <tr>
-        <td><%= area.institution_id %></td>
+        <td><%= area.institution.name %></td>
         <td><%= area.name %></td>
         <td><%= link_to 'Show', area %></td>
         <td><%= link_to 'Edit', edit_area_path(area) %></td>
