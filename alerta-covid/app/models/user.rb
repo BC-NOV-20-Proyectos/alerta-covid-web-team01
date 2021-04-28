@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   belongs_to :role
+  belongs_to :departament
   has_many :incidence
 
   def super_admin?
