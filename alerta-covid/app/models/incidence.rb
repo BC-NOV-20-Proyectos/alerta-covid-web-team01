@@ -36,4 +36,8 @@ class Incidence < ApplicationRecord
   def has_symptoms
     self.symptoms.count > 0 ? "Yes" : "No"
   end
+
+  def has_symptoms?
+    self.symptoms.count > 0
+  end
 end
