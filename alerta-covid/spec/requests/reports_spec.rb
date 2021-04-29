@@ -21,4 +21,32 @@ RSpec.describe "Reports", type: :request do
       expect(response).to have_http_status(:found)
     end
   end
+
+  describe "GET /reports/places" do
+    it "returns http success" do
+      get "/reports/places"
+      expect(response).to have_http_status(:found)
+    end
+  end
+
+  describe "GET /reports/places" do
+    it "returns http success" do
+      get "/reports/places?option=1&commit=filter"
+      expect(response).to have_http_status(:found)
+    end
+  end
+
+  describe "GET /reports/places" do
+    it "returns http success" do
+      get "/reports/places?option=2&commit=filter"
+      expect(response).to have_http_status(:found)
+    end
+  end
+
+  describe "GET /reports/places" do
+    it "returns http success" do
+      get "/reports/places?option=3&commit=filter"
+      expect(response).to have_http_status(:found)
+    end
+  end
 end

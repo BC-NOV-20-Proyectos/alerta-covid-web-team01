@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'rails_helper'  
 
 RSpec.describe ReportsController, type: :routing do
   describe 'routing' do
@@ -17,6 +17,18 @@ RSpec.describe ReportsController, type: :routing do
 
     it 'routes to #places' do
       expect(get: '/reports/places').to route_to('reports#places')
+    end
+
+    it 'routes to #places with params option 1' do
+      expect(get: '/reports/places?option=1&commit=filter').to route_to('reports#places', option: '1', commit: 'all')
+    end
+
+    it 'routes to #user with params option 2' do
+      expect(get: '/reports/users?option=2&commit=filter').to route_to('reports#places', option: '2', commit: 'all')
+    end
+
+    it 'routes to #user with params option 2' do
+      expect(get: '/reports/users?option=3&commit=filter').to route_to('reports#places', option: '3', commit: 'all')
     end
   end
 end
