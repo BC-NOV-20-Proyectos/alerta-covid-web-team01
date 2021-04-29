@@ -1,1 +1,8 @@
 <h1>Report places</h1>
+
+<%= form_with url: "/reports/places", method: :get do |form| %>	
+  <%= form.select(:option, options_for_select([['Places', 1], ['Areas', 2], ['Institutions', 3]])) %>
+  <%= form.submit "filter" %>
+<% end %>
+
+<%= render "report_by_places", attendaces: @reports %> 
