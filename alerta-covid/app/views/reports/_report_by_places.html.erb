@@ -1,0 +1,24 @@
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th scope="col">Institution	</th>
+      <th scope="col">Area</th>
+      <th scope="col">Place</th>
+      <th scope="col">Symptoms</th>
+      <th scope="col">Covid Positive</th>
+      <th scope="col">Covid Negative</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reports.each do |report|%>
+        <tr>
+          <td><%= report.area.institution.name%> </td>
+          <td><%= report.area.name%> </td> 
+          <td><%= report.name%> </td> 
+          <td><%= report.incidences.select{ |incidence| incidence.has_symptoms? }.count %> </td>
+          <td><%= report.incidences.select{ |incidence| incidence.result == true }.count %> </td> 
+					<td><%= report.incidences.select{ |incidence| incidence.result == false }.count %> </td> 
+        </tr>
+    <%end%>
+  </tbody>
+</table>
