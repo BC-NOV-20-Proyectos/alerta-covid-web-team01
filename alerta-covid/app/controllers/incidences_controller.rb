@@ -19,8 +19,8 @@ class IncidencesController < ApplicationController
 
   # GET /incidences/1/edit
   def edit
-    @user_symptoms = @incidence.symptoms.collect{|p|p.id}
-    @user_places = @incidence.places.collect{|p| p.id}
+    @user_symptoms = @incidence.symptoms.collect { |p| p.id }
+    @user_places = @incidence.places.collect{ |p| p.id }
   end
 
   # POST /incidences or /incidences.json
@@ -70,7 +70,6 @@ class IncidencesController < ApplicationController
   end
 
   def set_variables_with_params
-    puts("desde set params #{params.require(:incidence).inspect}")
     @incidence.set_symptoms(params[:symp]) if params[:symp]
     @incidence.set_places(params[:places]) if params[:places]
   end

@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         resources :departaments, only: [:index]
         get 'reports/places'
         get 'reports/users'
+        resources :incidences, only: [:index, :create, :update]
       end
     end
     
