@@ -1,0 +1,121 @@
+version: 2.1
+
+orbs:
+  heroku: circleci/heroku@0.0.4
+
+references:
+  container_setup: &container_setup
+    docker: # run the steps with Docker
+      - image: cimg/ruby:2.7.2-node # ...with this image as the primary container; this is where all `steps` will run
+        environment: # environment variables for primary container
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 37
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
+          RAILS_ENV: test
+      - image: circleci/postgres:9.5-alpine # database image
+        environment: # environment variables for database
+          POSTGRES_USER: postgres
+          POSTGRES_DB: alerta_covid_development
+          POSTGRES_PASSWORD: "postgres"
+  check_bundler_verson: &check_bundler_verson
+    run:
+      name: Which bundler?
+      command: bundle -v
+  update_setup: &update_setup
+    run:
+      name: update_bundler
+      command: gem install bundler:2.1.4
+  update_system: &update_system
+    run:
+      name: update_system
+      command: gem update --system
+
+jobs:
+  build: # runs not using Workflows must have a `build` job as entry point
+    working_directory: ~/alerta-covid-web-team01/alerta-covid
+    <<: *container_setup
+    steps: # a collection of executable commands
+      - checkout:
+          path: ~/alerta-covid-web-team01
+      - *update_system
+      - *update_setup
+      - *check_bundler_verson
+      - restore_cache:
+          keys:
+            - base-simulation-bundle-{{ checksum "Gemfile.lock" }}
+            - base-simulation-bundle
+      - run: # Install Ruby dependencies
+          name: Bundle Install
+          command: bundle check || bundle install
+      # Store bundle cache for Ruby dependencies
+      - save_cache:
+          key: base-simulation-bundle-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      # Only necessary if app uses webpacker or yarn in some other way
+      - restore_cache:
+          keys:
+            - base-simulation-yarn-{{ checksum "yarn.lock" }}
+            - base-simulation-yarn
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
+      # Store yarn / webpacker cache
+      - save_cache:
+          key: base-simulation-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database setup
+          command: bin/rails db:create  --trace
+      - run:
+          name: Database migrate
+          command: bin/rails db:migrate  --trace
+      - run:
+          name: Database seed
+          command: bin/rails db:seed  --trace
+
+  production-deploy:
+    <<: *container_setup
+    environment:
+      HEROKU_APP_NAME: alerta-covid
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - run: 
+          name: Deploy Heroku
+          command: git subtree push --prefix alerta-covid https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+      - run:
+          name:  Database Migrate
+          command: cd alerta-covid && heroku run rake db:migrate --app $HEROKU_APP_NAME
+      - run:
+          name: Database seeds
+          command: cd alerta-covid && heroku run rake db:seed --app $HEROKU_APP_NAME
+      - run:
+          name: Install dependencies
+          command: cd alerta-covid && heroku run bundle exec rails webpacker:yarn_install --app $HEROKU_APP_NAME
+      - run:
+          name: Removes the webpack compiled
+          command: cd alerta-covid && heroku run rake assets:clobber --app $HEROKU_APP_NAME
+      - run:
+          name: Compile assets
+          command: cd alerta-covid && heroku run rake assets:precompile --app $HEROKU_APP_NAME
+
+workflows:
+  version: 2.1
+  build-deploy:
+    jobs:
+      - build
+      - production-deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+              
