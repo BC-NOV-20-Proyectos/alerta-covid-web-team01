@@ -1,0 +1,14 @@
+<h1>report users</h1>
+
+<%= form_with url: "/reports/users", method: :get do |form| %>	
+  <%= form.label :start, "Start:" %>
+  <%= form.date_field :start, value: params[:start] %>
+	<%= form.label :finish, "Finish:" %>
+  <%= form.date_field :finish, value: params[:finish] %>
+  <%= form.submit "filter" %>
+<% end %>
+<%= form_with url: "/reports/users", method: :get do |form| %>
+  <%= form.submit "all" %>
+<% end %>
+
+<%= render "report_by_user", attendaces: @reports %>

@@ -28,7 +28,5 @@ class Place < ApplicationRecord
   
   def destroy_qr_code
     File.delete("app/assets/images/qr_codes/qrcode_#{self.id.to_s}.png")
-
-
   end
 end

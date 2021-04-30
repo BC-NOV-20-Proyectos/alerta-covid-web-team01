@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
   belongs_to :role
-  has_many :incidences
+  belongs_to :departament
+  has_many :incidence
 
   def super_admin?
     self.role.name == "Super Admin"
