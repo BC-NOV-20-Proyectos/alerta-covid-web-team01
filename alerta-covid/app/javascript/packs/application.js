@@ -3,16 +3,17 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+import "jquery";
+import "popper.js";
+import "bootstrap";
 import "channels";
-import "../stylesheets/application";
+import "./../stylesheets/application";
 
 import * as ActiveStorage from "@rails/activestorage";
 
 import Rails from "@rails/ujs";
 import Turbolinks from "turbolinks";
 
-require("bootstrap");
-
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();

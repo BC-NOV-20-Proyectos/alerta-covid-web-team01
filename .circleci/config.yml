@@ -101,13 +101,10 @@ jobs:
           command: cd alerta-covid && heroku run bundle exec rails webpacker:yarn_install --app $HEROKU_APP_NAME
       - run:
           name: Removes the webpack compiled
-          command: cd alerta-covid && heroku run rake assets:clobber --app $HEROKU_APP_NAME
+          command: cd alerta-covid && heroku run bundle exec rails assets:clobber --app $HEROKU_APP_NAME
       - run:
           name: Compile assets
-          command: cd alerta-covid && heroku run rake assets:precompile --app $HEROKU_APP_NAME
-      - run:
-          name: Webpacker compile
-          command: cd alerta-covid && heroku run ./bin/webpack
+          command: cd alerta-covid && heroku run bundle exec rails webpacker:compile --app $HEROKU_APP_NAME
 
   production-deploy:
     <<: *container_setup
@@ -131,13 +128,13 @@ jobs:
           command: cd alerta-covid && heroku run bundle exec rails webpacker:yarn_install --app $HEROKU_APP_NAME
       - run:
           name: Removes the webpack compiled
-          command: cd alerta-covid && heroku run rake assets:clobber --app $HEROKU_APP_NAME
+          command: cd alerta-covid && heroku run bundle exec rails assets:clobber --app $HEROKU_APP_NAME
       - run:
           name: Compile assets
-          command: cd alerta-covid && heroku run rake assets:precompile --app $HEROKU_APP_NAME
-      - run:
-          name: Webpacker compile
-          command: cd alerta-covid && heroku run ./bin/webpack
+          command: cd alerta-covid && heroku run bundle exec rails webpacker:compile --app $HEROKU_APP_NAME
+
+          
+bundle exec rails webpacker:compile
 
 workflows:
   version: 2.1
