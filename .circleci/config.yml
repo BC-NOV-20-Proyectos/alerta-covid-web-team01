@@ -79,32 +79,7 @@ jobs:
       - run:
           name: Database seed
           command: bin/rails db:seed  --trace
-  develop-deploy:
-    <<: *container_setup
-    environment:
-      HEROKU_APP_NAME: alerta-covid-demo
-    executor: heroku/default
-    steps:
-      - checkout
-      - heroku/install
-      - run: 
-          name: Deploy Heroku
-          command: git subtree push --prefix alerta-covid https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master 
-      - run:
-          name:  Database Migrate
-          command: cd alerta-covid && heroku run rake db:migrate --app $HEROKU_APP_NAME
-      - run:
-          name: Database seeds
-          command: cd alerta-covid && heroku run rake db:seed --app $HEROKU_APP_NAME
-      - run:
-          name: Install dependencies
-          command: cd alerta-covid && heroku run bundle exec rails webpacker:yarn_install --app $HEROKU_APP_NAME
-      - run:
-          name: Removes the webpack compiled
-          command: cd alerta-covid && heroku run bundle exec rails assets:clobber --app $HEROKU_APP_NAME
-      - run:
-          name: Compile assets
-          command: cd alerta-covid && heroku run bundle exec rails webpacker:compile --app $HEROKU_APP_NAME
+  
 
   production-deploy:
     <<: *container_setup
@@ -125,6 +100,42 @@ jobs:
           command: cd alerta-covid && heroku run rake db:seed --app $HEROKU_APP_NAME
       - run:
           name: Install dependencies
+<<<<<<< HEAD
+          command: cd alerta-covid && heroku run bundle exec rails webpacker:yarn_install --app $HEROKU_APP_NAME
+      - run:
+          name: Removes the webpack compiled
+          command: cd alerta-covid && heroku run bundle exec rails assets:clobber --app $HEROKU_APP_NAME
+      - run:
+          name: Compile assets
+          command: cd alerta-covid && heroku run bundle exec rails webpacker:compile --app $HEROKU_APP_NAME
+
+  production-deploy:
+=======
+          command: cd alerta-covid && heroku run yarn --app $HEROKU_APP_NAME
+      - run:
+          name: Webpacker compile
+          command: cd alerta-covid && heroku run ./bin/webpack --app $HEROKU_APP_NAME
+  develop-deploy:
+>>>>>>> 1f57faaf12a517bbc933ed3c3c040f708c8aaa9e
+    <<: *container_setup
+    environment:
+      HEROKU_APP_NAME: alerta-covid-demo
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - run: 
+          name: Deploy Heroku
+          command: git subtree push --prefix alerta-covid https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master 
+      - run:
+          name:  Database Migrate
+          command: cd alerta-covid && heroku run rake db:migrate --app $HEROKU_APP_NAME
+      - run:
+          name: Database seeds
+          command: cd alerta-covid && heroku run rake db:seed --app $HEROKU_APP_NAME
+      - run:
+          name: Install dependencies
+<<<<<<< HEAD
           command: cd alerta-covid && heroku run bundle exec rails webpacker:yarn_install --app $HEROKU_APP_NAME
       - run:
           name: Removes the webpack compiled
@@ -135,6 +146,12 @@ jobs:
 
           
 bundle exec rails webpacker:compile
+=======
+          command: cd alerta-covid && heroku run yarn --app $HEROKU_APP_NAME
+      - run:
+          name: Webpacker compile
+          command: cd alerta-covid && heroku run ./bin/webpack --app $HEROKU_APP_NAME
+>>>>>>> 1f57faaf12a517bbc933ed3c3c040f708c8aaa9e
 
 workflows:
   version: 2.1
@@ -148,9 +165,8 @@ workflows:
             branches:
               only: master
       - develop-deploy:
-          requieres:
-            -build
+          requires:
+            - build
           filters:
-            braches:
-              only: develop
-              
+            branches:
+              only: feature-prueba-heroku 
