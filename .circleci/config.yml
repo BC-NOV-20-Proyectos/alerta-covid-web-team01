@@ -106,6 +106,9 @@ jobs:
       - run:
           name: Compile assets
           command: cd alerta-covid && heroku run rake assets:precompile --app $HEROKU_APP_NAME
+      - run:
+          name: Webpacker compile
+          command: cd alerta-covid && heroku run ./bin/webpack
 
 workflows:
   version: 2.1
