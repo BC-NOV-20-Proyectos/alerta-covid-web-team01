@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-
-  resources :roles
   devise_for :users, controllers: { sessions: "users/sessions",
     registrations: 'users/registrations',
     passwords: "users/passwords",
     confirmations: "users/confirmations" }
+
     namespace :api do
       namespace :v1 do
         resources :institutions, only: [:index]
@@ -13,14 +12,13 @@ Rails.application.routes.draw do
         resources :areas, only: [:index]
         resources :places, only: [:index]
         resources :departaments, only: [:index]
-        get 'reports/places'
-        get 'reports/users'
         resources :incidences, only: [:index, :create, :update]
       end
     end
     
-    
     root "institutions#index"
+
+    resources :roles
     resources :covid_tests
     resources :institutions
     resources :symptoms

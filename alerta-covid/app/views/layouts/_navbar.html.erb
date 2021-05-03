@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">ALERTA COVID</a>
+    <a class="navbar-brand" href="/">ALERTA COVID</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -12,21 +12,19 @@
             <li class="nav-item" id="roles_li">
                 <a class="nav-link" href="<%= roles_path %>">ROLES</a>
             </li>            
-            <li class="nav-item" id="companies_li">
-                <a class="nav-link" href="#">COMPANIES <span class="sr-only">(current)</span></a>
+            <li class="nav-item" id="incidences_li">
+                <a class="nav-link" href="<%= incidences_path %>">INCIDENCES</a>
             </li>
-            <li class="nav-item" id="employees_li">
-                <a class="nav-link" href="#">EMPLOYEES</a>
+            <li class="nav-item" id="places_li">
+                <a class="nav-link" href="<%= places_path %>">PLACES</a>
             </li>
             <li class="nav-item dropdown" id="reports_li">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 REPORTS
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Attendance by day</a>
-                <a class="dropdown-item" href="#">Average time employees checked in/out by month</a>
-                <a class="dropdown-item" href="#">Absence report by day</a>
-                <a class="dropdown-item" href="#">Absence report by month</a>
+                <a class="dropdown-item" href="/reports/users">Users with incidences</a>
+                <a class="dropdown-item" href="/reports/places">Places with incidences</a>
                 </div>
             </li>
         </ul>
