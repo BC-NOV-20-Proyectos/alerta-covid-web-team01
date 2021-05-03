@@ -1,0 +1,50 @@
+<%= form_with(model: role) do |form| %>
+  <% if role.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(place.errors.count, "error") %> prohibited this role from being saved:</h2>
+
+      <ul>
+        <% role.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <br>
+
+  
+  <div class="field">
+    <%= form.label :permissions %>
+    <div class='table-responsive mt-4'>
+      <table class='table table-hover'>
+        <thead class='thead-light'>
+            <tr>
+              <th>Class</th>
+              <th>Action</th>
+              <th><%= check_box_tag('main', 0, false) %></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @permissions.each do |permission| %>
+              <tr>
+                  <td><%= permission.subject_class %></td>
+                  <td><%= permission.action %></td>
+                  <td><%= check_box_tag 'permissions[]', permission.id, { array: true, class: "check_box" } %></td>
+              </tr>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

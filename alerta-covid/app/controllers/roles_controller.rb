@@ -12,12 +12,28 @@ class RolesController < ApplicationController
     @permissions = @role.permissions
   end
 
+  def new
+    @permissions = Permission.all.map{ |i| i if (["all"].exclude? i.subject_class) }.compact
+    @role = Role.new
+  end
+
   def edit
     @role = Role.find(params[:id])
     #we dont want the Drawing permissions to be displayed.
     #this way u can display only selected models. you can choose which methods u want to display too.
     @permissions = Permission.all.map{|i| i if (["all"].exclude? i.subject_class) }.compact
     @role_permissions = @role.permissions.collect{|p| p.id}
+  end
+
+  def create
+    @role = Role.new(role_params)
+    @role.permissions = []
+    @role.set_permissions(params[:permissions]) if params[:permissions]
+    if @role.save
+      redirect_to @role, notice: "Role was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -32,8 +48,12 @@ class RolesController < ApplicationController
   end
 
   private
- 
+
   def is_super_admin?
     redirect_to root_path and return unless current_user.super_admin?
+  end
+
+  def role_params
+    params.require(:role).permit(:name)
   end
 end
