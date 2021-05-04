@@ -36,6 +36,6 @@ class Ability
       else
         can permission.action.to_sym, permission.subject_class.constantize
       end
-    end
+    end 
   end
 end
