@@ -31,11 +31,15 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
     user.role.permissions.each do |permission|
-      if permission.subject_class == "all"
+      if permission.subject_class == 'all'
         can permission.action.to_sym, permission.subject_class.to_sym
       else
         can permission.action.to_sym, permission.subject_class.constantize
       end
-    end 
+    end
+    if user.has_role? 'Data Reporter'
+      can :users, ReportsController
+      can :places, ReportsController
+    end
   end
 end

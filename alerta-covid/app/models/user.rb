@@ -11,5 +11,13 @@ class User < ApplicationRecord
   def super_admin?
     self.role.name == "Super Admin"
   end
+
+  def has_role?(role_name)
+    Role.all.any? {|role| role.name == role_name}
+  end
+
+  def is_admin?
+    has_role?("Super Admin")
+  end
   
 end
