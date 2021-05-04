@@ -33,7 +33,7 @@ namespace :permission do
 end
 
 def excludes_controllers
-  ['HomeController']
+  ['HomeController', 'ReportsController']
 end
 
 def eval_cancan_action(action)
