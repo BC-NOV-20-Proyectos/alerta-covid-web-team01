@@ -1,0 +1,48 @@
+<%= form_with(model: @user) do |form| %>
+    <div class='col'>
+      <div class='row-md-3 mt-2'>
+        <label for=''>Email</label>
+        <%= form.text_field :email, class: 'form-control', rows:'1', max: '25', required: 'true' %>
+      </div>
+
+      <div class='row-md-3 mt-2'>
+        <label for=''>Password</label>
+        <%= form.password_field :password, class: 'form-control', rows:'1', max: '25', required: 'true' %>
+      </div>
+
+      <div class='row-md-3 mt-2'>
+        <label for=''>Role</label>
+        <%= form.select :role_id, @roles.map{ |role| [role.name, role.id] }, { include_blank: 'Select Role' }, { required: 'true', autofocus: 'true', class: 'form-control' } %>
+      </div>
+
+      <div class='row-md-3 mt-2'>
+        <label for=''>Department</label>
+        <%= form.select :departament_id, @departments.map{ |department| [department.name, department.id] }, { include_blank: 'Select Department' }, { required: 'true', autofocus: 'true', class: 'form-control' } %>
+      </div>
+
+
+      <div class='row-md-3 mt-2'>
+        <label for=''>Name</label>
+        <%= form.text_field :full_name, class: 'form-control', rows:'1', max: '25', required: 'true' %>
+      </div>
+
+      <div class='row-md-3 mt-2'>
+        <label for=''>Last Name</label>
+        <%= form.text_field :lastname, class: 'form-control', rows:'1', max: '25', required: 'true' %>
+      </div>
+
+      <div class='row-md-3 mt-2'>
+        <label for=''>Born Date</label>
+        <%= form.date_field :born_date %>
+      </div>
+
+      <div class='row-md-3 mt-2'>
+        <label for=''>Gender</label>
+        <%= form.select :gender, options_for_select([['Men', 1], ['Women', 2]]), { include_blank: 'Select Gender' }, { required: 'true', autofocus: 'true', class: 'form-control' } %>
+      </div>
+      
+      <div class='row-md-3 mt-3'>
+        <%= form.submit 'Create User', class: 'btn btn-md btn-primary mt-4'%>
+      </div>        
+    </div>    
+  <% end %>

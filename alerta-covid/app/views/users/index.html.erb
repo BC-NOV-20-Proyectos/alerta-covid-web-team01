@@ -30,22 +30,6 @@
 
   <br>
 
-  <%= form_with(model: @user) do |form| %>
-    <div class='row'>
-      <div class='col-md-3 mt-2'>
-        <label for=''>Email</label>
-        <%= form.text_field :email, class: 'form-control', rows:'1', max: '25', required: 'true' %>
-      </div>
-
-      <div class='col-md-3 mt-2'>
-        <label for=''>Role</label>
-        <%= form.select :role_id, @roles.map{ |role| [role.name, role.id] }, { include_blank: 'Select Role' }, { required: 'true', autofocus: 'true', class: 'form-control' } %>
-      </div>
-      
-      <div class='col-md-3 mt-3'>
-        <%= form.submit 'Create User', class: 'btn btn-md btn-primary mt-4'%>
-      </div>        
-    </div>    
-  <% end %>
+  <%= link_to 'New User', new_user_path %>
 
 </div>
