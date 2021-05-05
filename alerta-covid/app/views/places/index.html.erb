@@ -18,8 +18,8 @@
       <tr>
         <td><%= place.name %></td>
         <td><%= place.area.name %></td>
-        <% if place.incidences.select{ |incidence| incidence.result && (DateTime.now - 10.days) <= incidence.delivery }.count > 0 %>
-          <td bgcolor="red"><%= place.incidences.select{ |incidence| incidence.result && (DateTime.now - 10.days) <= incidence.delivery }.count %> active cases</td>
+        <% if place.are_there_active_cases?%>
+          <td bgcolor="red"><%= place.active_cases_teen_days_ago%> active cases</td>
         <%end%>
         <td><%= link_to 'Show', place %></td>
         <% if user_signed_in? %>
