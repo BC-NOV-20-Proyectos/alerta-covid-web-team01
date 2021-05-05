@@ -4,7 +4,8 @@ class AreasController < ApplicationController
 
   # GET /areas or /areas.json
   def index
-    @areas = Area.all.includes(:institution)
+    @current_institution = current_institution
+    @areas = Area.all.includes(:institution).where(institution_id: @current_institution.id)
   end
 
   # GET /areas/1 or /areas/1.json
