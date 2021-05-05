@@ -5,7 +5,11 @@ class InstitutionsController < ApplicationController
 
   # GET /institutions or /institutions.json
   def index
-    @institutions = Institution.all
+    if(current_user.super_admin?)
+      @institutions = Institution.all
+    else
+      @institutions = Institution.all.where(id: current_institution.id)
+    end
   end
 
   # GET /institutions/1 or /institutions/1.json
@@ -23,27 +27,33 @@ class InstitutionsController < ApplicationController
 
   # POST /institutions or /institutions.json
   def create
-    @institution = Institution.new(institution_params)
-    if @institution.save
-      redirect_to @institution, notice: "Institution was successfully created."
-    else
-      render :new, status: :unprocessable_entity
+    if(current_user.super_admin?)
+      @institution = Institution.new(institution_params)
+      if @institution.save
+        redirect_to @institution, notice: "Institution was successfully created."
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
   end
 
   # PATCH/PUT /institutions/1 or /institutions/1.json
   def update
-    if @institution.update(institution_params)
-      redirect_to @institution, notice: "Institution was successfully updated."
-    else
-      render :edit, status: :unprocessable_entity
+    if(current_user.super_admin?)
+      if @institution.update(institution_params)
+        redirect_to @institution, notice: "Institution was successfully updated."
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 
   # DELETE /institutions/1 or /institutions/1.json
   def destroy
-    @institution.destroy
-    redirect_to institutions_url, notice: "Institution was successfully destroyed."
+    if(current_user.super_admin?)
+      @institution.destroy
+      redirect_to institutions_url, notice: "Institution was successfully destroyed."
+    end
   end
 
   private
