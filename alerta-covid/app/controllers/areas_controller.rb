@@ -4,8 +4,11 @@ class AreasController < ApplicationController
 
   # GET /areas or /areas.json
   def index
-    @current_institution = current_institution
-    @areas = Area.all.includes(:institution).where(institution_id: @current_institution.id)
+    if(current_user.super_admin?)
+      @areas = Area.all.order(:institution_id)
+    else
+      @areas = Area.all.includes(:institution).where(institution_id: current_institution.id)
+    end
   end
 
   # GET /areas/1 or /areas/1.json
@@ -23,7 +26,12 @@ class AreasController < ApplicationController
 
   # POST /areas or /areas.json
   def create
-    @area = Area.new(area_params)
+    if(current_user.super_admin?)
+      @area = Area.new(area_params_super)
+    else
+      @area = Area.new(area_params)
+      @area.institution_id = current_institution.id
+    end
     if @area.save
       redirect_to @area, notice: "Area was successfully created."
     else
@@ -33,7 +41,8 @@ class AreasController < ApplicationController
 
   # PATCH/PUT /areas/1 or /areas/1.json
   def update
-    if @area.update(area_params)
+    update_params = current_user.super_admin? ? area_params_super : area_params
+    if @area.update(update_params)
       redirect_to @area, notice: "Area was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -54,10 +63,14 @@ class AreasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def area_params
+      params.require(:area).permit(:name)
+    end
+
+    def area_params_super
       params.require(:area).permit(:institution_id, :name)
     end
 
     def get_institutions
-      @institutions=Institution.all
+      @institutions = Institution.all
     end
 end
