@@ -8,7 +8,7 @@
       <th>Name</th>
       <th>Area</th>
       <%if user_signed_in? %>
-        <th colspan="3"></th>
+        <th colspan="4"></th>
       <%end%>
     </tr>
   </thead>
@@ -18,6 +18,9 @@
       <tr>
         <td><%= place.name %></td>
         <td><%= place.area.name %></td>
+        <% if place.incidences.select{ |incidence| incidence.result && (DateTime.now - 10.days) <= incidence.delivery }.count > 0 %>
+          <td bgcolor="red"><%= place.incidences.select{ |incidence| incidence.result && (DateTime.now - 10.days) <= incidence.delivery }.count %> active cases</td>
+        <%end%>
         <td><%= link_to 'Show', place %></td>
         <% if user_signed_in? %>
           <td><%= link_to 'Edit', edit_place_path(place) %></td>
