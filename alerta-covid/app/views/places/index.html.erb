@@ -22,7 +22,7 @@
           <td bgcolor="red"><%= place.active_cases_teen_days_ago%> active cases</td>
         <%end%>
         <td><%= link_to 'Show', place %></td>
-        <% if user_signed_in? %>
+        <% if user_signed_in? && place.area.institution_id == @current_institution.id || current_user.super_admin?%>
           <td><%= link_to 'Edit', edit_place_path(place) %></td>
           <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <%end%>
