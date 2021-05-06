@@ -1,10 +1,6 @@
 <h1>Editing Area</h1>
 
-<%if current_user.super_admin?%>
-  <%= render 'form_super', area: @area %>
-<%else%>
-  <%= render 'form', area: @area %>
-<%end%>
+<%= render 'form', area: @area %>
 
 <%= link_to 'Show', @area %> |
 <%= link_to 'Back', areas_path %>
