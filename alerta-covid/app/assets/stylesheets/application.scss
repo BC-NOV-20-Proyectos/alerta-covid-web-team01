@@ -1,1 +1,27 @@
 // app/javascript/stylesheets/application.scss
+@import "bootstrap/scss/bootstrap";
+
+.main-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+  flex: 1;
+}
+
+.bg-Light {
+  background-color: #83c5b5;
+  .nav-item > *,
+  .navbar-brand {
+    color: #00271e;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-item {
+    margin: auto;
+  }
+}
