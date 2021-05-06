@@ -12,7 +12,8 @@ import Rails from "@rails/ujs";
 import Turbolinks from "turbolinks";
 
 require("bootstrap");
+import "@fortawesome/fontawesome-free/css/all.css";
 
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();
