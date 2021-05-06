@@ -1,6 +1,7 @@
 class RolesController < ApplicationController
   before_action :authenticate_user!
   before_action :is_super_admin?
+  before_action :set_role, only: %i[show edit update destroy]
 
   def index
     #you dont want to set the permissions for Super Admin.
@@ -8,7 +9,6 @@ class RolesController < ApplicationController
   end
 
   def show
-    @role = Role.find(params[:id])
     @permissions = @role.permissions
   end
 
@@ -18,7 +18,6 @@ class RolesController < ApplicationController
   end
 
   def edit
-    @role = Role.find(params[:id])
     #we dont want the Drawing permissions to be displayed.
     #this way u can display only selected models. you can choose which methods u want to display too.
     @permissions = Permission.all.map{|i| i if (["all"].exclude? i.subject_class) }.compact
@@ -37,7 +36,6 @@ class RolesController < ApplicationController
   end
 
   def update
-    @role = Role.find(params[:id])
     @role.permissions = []
     @role.set_permissions(params[:permissions]) if params[:permissions]
     if @role.save
@@ -45,6 +43,15 @@ class RolesController < ApplicationController
     end
     @permissions = Permission.all.map{|i| i if (["all"].exclude? i.subject_class) }.compact
     render 'edit'
+  end
+
+  def destroy
+    if(@role.users.count == 0)
+      @role.destroy
+      redirect_to roles_url, notice: "Role was successfully destroyed."
+    else
+      redirect_to roles_url, alert: "Role is being using by users."
+    end
   end
 
   private
@@ -55,5 +62,9 @@ class RolesController < ApplicationController
 
   def role_params
     params.require(:role).permit(:name)
+  end
+
+  def set_role
+    @role = Role.find(params[:id])
   end
 end

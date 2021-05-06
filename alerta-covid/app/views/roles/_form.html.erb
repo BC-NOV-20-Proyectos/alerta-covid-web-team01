@@ -36,7 +36,7 @@
               <tr>
                   <td><%= permission.subject_class %></td>
                   <td><%= permission.action %></td>
-                  <td><%= check_box_tag 'permissions[]', permission.id, { array: true, class: "check_box" } %></td>
+                  <td><%= check_box_tag 'permissions[]', permission.id, false, { array: true, class: "check_box" } %></td>
               </tr>
             <% end %>
         </tbody>
