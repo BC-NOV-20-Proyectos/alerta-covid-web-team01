@@ -3,6 +3,9 @@ class RolesController < ApplicationController
   before_action :is_super_admin?
   before_action :set_role, only: %i[show edit update destroy]
 
+  load_and_authorize_resource
+  before_action :load_permissions
+
   def index
     #you dont want to set the permissions for Super Admin.
     @roles = Role.all.map{|i| i if (i.name != "Super Admin") }.compact

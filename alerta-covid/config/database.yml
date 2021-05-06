@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: alerta_covid_production
-  username: alerta_covid
-  password: <%= ENV['ALERTA_COVID_DATABASE_PASSWORD'] %>
+  # username: alerta_covid
+  # password: <%= ENV['ALERTA_COVID_DATABASE_PASSWORD'] %>

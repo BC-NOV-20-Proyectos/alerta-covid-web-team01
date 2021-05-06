@@ -1,0 +1,4 @@
+<h3 class="mt-4">Alerta Covid - Welcome</h3>
+<% if !user_signed_in? %>
+    <td><%= link_to 'Log in', new_user_session_path, class: 'btn btn-sm btn-primary' %></td>
+<% end %>
