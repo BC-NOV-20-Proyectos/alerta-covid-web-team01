@@ -11,7 +11,7 @@ const DAYS = [
   "Saturday",
 ];
 
-document.addEventListener("DOMContentLoaded", function () {
+if (currentDate && currentTime)
   setInterval(() => {
     let time = new Date();
 
@@ -20,4 +20,3 @@ document.addEventListener("DOMContentLoaded", function () {
       DAYS[time.getDay()]
     }`;
   }, 1000);
-});
