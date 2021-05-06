@@ -3,13 +3,21 @@ class UsersController < ApplicationController
   before_action :load_permissions
   
   def index
-    @users = User.all.includes(:role)
-    @user = User.new
+    if(current_user.super_admin?)
+      @users = User.all.includes(:role).order(:full_name)
+    else
+      @users = User.all.includes(:role).joins(:departament).where('departament.institution_id' => current_institution.id).order(:full_name)
+    end
   end
 
   def new
-    @roles = Role.all
-    @departments = Departament.all
+    if(current_user.super_admin?)
+      @roles = Role.all
+      @departments = Departament.all
+    else
+      @roles = Role.all.where(name: ["Data Reporter", "Final User"])
+      @departments = Departament.all.where(institution_id: current_institution.id)
+    end
   end
 
   def create
