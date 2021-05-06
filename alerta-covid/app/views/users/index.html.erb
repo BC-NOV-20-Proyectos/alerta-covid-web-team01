@@ -9,9 +9,12 @@
       <thead class='thead-light'>
         <tr>
           <th>Email</th>
+          <th>Name</th>
           <th>Confirmed</th>
           <th>Role</th>
-          <th>Actions</th>
+          <th>Department</th>
+          <th>Gender</th>
+          <th>Born Date</th>
         </tr>
       </thead>
 
@@ -19,9 +22,12 @@
         <% @users.each do |user| %>
           <tr>
             <td><%= user.email %></td>
+            <td><%= "#{user.full_name} #{user.lastname}" %></td>
             <td><%= user.confirmed_at.present? ? 'Confirmed' : 'Unconfirmed' %></td>
             <td><%= user&.role&.name %></td>
-            <td>No Actions</td>
+            <td><%= user&.departament&.name %></td>
+            <td><%= user.gender == "1" ?  "Men" : "Women" %></td>
+            <td><%= user.born_date.strftime("%d/%m/%Y") if(user.born_date) %></td>
           </tr>
         <% end %>
       </tbody>
