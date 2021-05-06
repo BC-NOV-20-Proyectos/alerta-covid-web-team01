@@ -4,7 +4,11 @@ class DepartamentsController < ApplicationController
 
   # GET /departaments or /departaments.json
   def index
-    @departaments = Departament.all.includes(:institution)
+    if(current_user.super_admin?)
+      @departaments = Departament.all.includes(:institution).order(:institution_id)
+    else
+      @departaments = Departament.all.includes(:institution).where(institution_id: current_institution.id)
+    end
   end
 
   # GET /departaments/1 or /departaments/1.json
@@ -22,7 +26,12 @@ class DepartamentsController < ApplicationController
 
   # POST /departaments or /departaments.json
   def create
-    @departament = Departament.new(departament_params)
+    if(current_user.super_admin?)
+      @departament = Departament.new(departament_params_super)
+    else
+      @departament = Departament.new(departament_params)
+      @departament.institution_id = current_institution.id
+    end
     if @departament.save
       redirect_to @departament, notice: "Departament was successfully created."
     else
@@ -32,7 +41,8 @@ class DepartamentsController < ApplicationController
 
   # PATCH/PUT /departaments/1 or /departaments/1.json
   def update
-    if @departament.update(departament_params)
+    update_params = current_user.super_admin? ? departament_params_super : departament_params
+    if @departament.update(update_params)
       redirect_to @departament, notice: "Departament was successfully updated."
     else
       render :edit, status: :unprocessable_entity
@@ -53,10 +63,14 @@ class DepartamentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def departament_params
+      params.require(:departament).permit(:name)
+    end
+
+    def departament_params_super
       params.require(:departament).permit(:institution_id, :name)
     end
 
     def get_institutions
-      @institutions=Institution.all
+      @institutions = Institution.all
     end
 end

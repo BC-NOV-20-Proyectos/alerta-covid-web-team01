@@ -5,12 +5,15 @@ class UsersController < ApplicationController
   def index
     @users = User.all.includes(:role)
     @user = User.new
+  end
+
+  def new
     @roles = Role.all
+    @departments = Departament.all
   end
 
   def create
     @user = User.new(user_params)
-    @user.password, @user.password_confirmation = 'pass123456', 'pass123456'
     if @user.save
       @user, flash[:notice] = User.new, 'User created, email notification sent'
     else
@@ -22,6 +25,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :role_id)
+    params.require(:user).permit(:email, :password, :role_id, :departament_id, :full_name, :lastname, :born_date, :gender)
   end
 end

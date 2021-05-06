@@ -11,9 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= select_tag 'area[institution_id]', options_from_collection_for_select(@institutions, "id", "name", @area.institution_id), include_blank: "Select Area", class: 'form-control', id: 'select-institution'  %>
-  </div>
+  <%if current_user.super_admin?%>
+    <div class="field">
+      <%= select_tag 'area[institution_id]', options_from_collection_for_select(@institutions, "id", "name", @area.institution_id), include_blank: "Select Area", class: 'form-control', id: 'select-institution'  %>
+    </div>
+  <%end%>
 
   <div class="field">
     <%= form.label :name %>
