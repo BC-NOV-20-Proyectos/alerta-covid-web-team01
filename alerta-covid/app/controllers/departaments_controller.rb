@@ -2,6 +2,9 @@ class DepartamentsController < ApplicationController
   before_action :set_departament, only: %i[ show edit update destroy ]
   before_action :get_institutions, only: %i[ new edit]
 
+  load_and_authorize_resource
+  before_action :load_permissions
+
   # GET /departaments or /departaments.json
   def index
     @departaments = Departament.all.includes(:institution)

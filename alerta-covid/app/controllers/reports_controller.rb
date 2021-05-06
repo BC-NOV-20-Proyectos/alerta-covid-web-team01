@@ -1,10 +1,13 @@
 class ReportsController < ApplicationController
+
   def users
+    authorize! :users, ReportsController
     commit = params[:commit]
     @reports = get_reports_by_users(commit)
   end
 
   def places
+    authorize! :places, ReportsController
     @reports = get_reports_by_places(params[:option])
   end
 

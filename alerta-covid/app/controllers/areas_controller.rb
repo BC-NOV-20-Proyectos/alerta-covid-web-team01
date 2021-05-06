@@ -1,5 +1,8 @@
 class AreasController < ApplicationController
   before_action :set_area, only: %i[ show edit update destroy ]
+  
+  load_and_authorize_resource
+  before_action :load_permissions
   before_action :get_institutions, only: %i[ new edit]
 
   # GET /areas or /areas.json
