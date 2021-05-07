@@ -29,4 +29,12 @@ class Place < ApplicationRecord
   def destroy_qr_code
     File.delete("app/assets/images/qr_codes/qrcode_#{self.id.to_s}.png")
   end
+
+  def are_there_active_cases?
+    active_cases_teen_days_ago > 0
+  end
+
+  def active_cases_teen_days_ago
+    self.incidences.where(result: true, delivery: 10.days.ago..Date.today).count
+  end
 end

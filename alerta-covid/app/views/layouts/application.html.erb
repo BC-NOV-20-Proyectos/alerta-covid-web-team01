@@ -6,15 +6,20 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="main-wrapper">
     <% if user_signed_in? %>
-      <%= render "layouts/navbar" %>
-    <% end %>
-    <%= yield %>
+      <%= render "layouts/sidebar"%>
+    <%end%>
+    <main class="content">
+      <% if user_signed_in? %>
+        <%= render "layouts/navbar" %>
+      <% end %>
+      <%= yield %>
+    </main>
   </body>
   <%= flash_msg.html_safe if flash.any? %>
   <% flash.discard(flash_msg) %>

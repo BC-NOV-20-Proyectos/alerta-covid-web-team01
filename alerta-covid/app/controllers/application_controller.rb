@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
   def load_permissions
     @current_permissions = current_user.role.permissions.collect { |i| [i.subject_class, i.action] }
   end
+  
+  def current_institution
+    @current_institution ||= current_user.departament.institution if current_user
+  end
 end

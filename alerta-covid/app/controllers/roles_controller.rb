@@ -1,6 +1,7 @@
 class RolesController < ApplicationController
   before_action :authenticate_user!
   before_action :is_super_admin?
+  before_action :set_role, only: %i[show edit update destroy]
 
   load_and_authorize_resource
   before_action :load_permissions
@@ -11,20 +12,33 @@ class RolesController < ApplicationController
   end
 
   def show
-    @role = Role.find(params[:id])
     @permissions = @role.permissions
   end
 
+  def new
+    @permissions = Permission.all.map{ |i| i if (["all"].exclude? i.subject_class) }.compact
+    @role = Role.new
+  end
+
   def edit
-    @role = Role.find(params[:id])
     #we dont want the Drawing permissions to be displayed.
     #this way u can display only selected models. you can choose which methods u want to display too.
     @permissions = Permission.all.map{|i| i if (["all"].exclude? i.subject_class) }.compact
     @role_permissions = @role.permissions.collect{|p| p.id}
   end
 
+  def create
+    @role = Role.new(role_params)
+    @role.permissions = []
+    @role.set_permissions(params[:permissions]) if params[:permissions]
+    if @role.save
+      redirect_to @role, notice: "Role was successfully created."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def update
-    @role = Role.find(params[:id])
     @role.permissions = []
     @role.set_permissions(params[:permissions]) if params[:permissions]
     if @role.save
@@ -34,9 +48,26 @@ class RolesController < ApplicationController
     render 'edit'
   end
 
+  def destroy
+    if(@role.users.count == 0)
+      @role.destroy
+      redirect_to roles_url, notice: "Role was successfully destroyed."
+    else
+      redirect_to roles_url, alert: "Role is being using by users."
+    end
+  end
+
   private
- 
+
   def is_super_admin?
     redirect_to root_path and return unless current_user.super_admin?
+  end
+
+  def role_params
+    params.require(:role).permit(:name)
+  end
+
+  def set_role
+    @role = Role.find(params[:id])
   end
 end

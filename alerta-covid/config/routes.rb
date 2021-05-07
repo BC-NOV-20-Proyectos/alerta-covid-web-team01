@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-
-  devise_for :users, controllers: { sessions: 'users/sessions',
+devise_for :users, controllers: { sessions: 'users/sessions',
                                     registrations: 'users/registrations',
                                     passwords: 'users/passwords',
                                     confirmations: 'users/confirmations' }
@@ -36,7 +35,7 @@ Rails.application.routes.draw do
   resources :places
   resources :roles
   resources :symptoms  
-
+  
   scope :admin do
     resources :users
   end

@@ -1,6 +1,10 @@
 <h1>Editing Institution</h1>
 
-<%= render 'form', institution: @institution %>
+<%if(current_user.super_admin?)%>
+  <%= render 'form', institution: @institution %>
+<%else%>
+  <h2>You're not authorized to edit this template</h2>
+<%end%>
 
 <%= link_to 'Show', @institution %> |
 <%= link_to 'Back', institutions_path %>

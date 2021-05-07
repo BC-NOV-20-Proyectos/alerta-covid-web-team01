@@ -9,20 +9,22 @@ class PlacesController < ApplicationController
   # GET /places or /places.json
   def index
     @places = Place.all.includes(:area)
+    @current_institution = current_institution
   end
 
   # GET /places/1 or /places/1.json
   def show
-    
   end
 
   # GET /places/new
   def new
     @place = Place.new
+    @areas = current_user.super_admin? ? Area.all : Area.all.where(institution_id: current_institution.id)
   end
 
   # GET /places/1/edit
   def edit
+    @areas = current_user.super_admin? ? Area.all : Area.all.where(institution_id: current_institution.id)
   end
 
   # POST /places or /places.json

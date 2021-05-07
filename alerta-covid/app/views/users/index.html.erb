@@ -9,9 +9,13 @@
       <thead class='thead-light'>
         <tr>
           <th>Email</th>
+          <th>Name</th>
           <th>Confirmed</th>
           <th>Role</th>
-          <th>Actions</th>
+          <th>Department</th>
+          <th>Gender</th>
+          <th>Born Date</th>
+          <th colspan="3"></th>
         </tr>
       </thead>
 
@@ -19,9 +23,15 @@
         <% @users.each do |user| %>
           <tr>
             <td><%= user.email %></td>
+            <td><%= "#{user.full_name} #{user.lastname}" %></td>
             <td><%= user.confirmed_at.present? ? 'Confirmed' : 'Unconfirmed' %></td>
             <td><%= user&.role&.name %></td>
-            <td>No Actions</td>
+            <td><%= user&.departament&.name %></td>
+            <td><%= user.gender == "1" ?  "Men" : "Women" %></td>
+            <td><%= user.born_date.strftime("%d/%m/%Y") if(user.born_date) %></td>
+            <td><%= link_to 'Show', user %></td>
+            <td><%= link_to 'Edit', edit_user_path(user) %></td>
+            <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
@@ -30,22 +40,6 @@
 
   <br>
 
-  <%= form_with(model: @user) do |form| %>
-    <div class='row'>
-      <div class='col-md-3 mt-2'>
-        <label for=''>Email</label>
-        <%= form.text_field :email, class: 'form-control', rows:'1', max: '25', required: 'true' %>
-      </div>
-
-      <div class='col-md-3 mt-2'>
-        <label for=''>Role</label>
-        <%= form.select :role_id, @roles.map{ |role| [role.name, role.id] }, { include_blank: 'Select Role' }, { required: 'true', autofocus: 'true', class: 'form-control' } %>
-      </div>
-      
-      <div class='col-md-3 mt-3'>
-        <%= form.submit 'Create User', class: 'btn btn-md btn-primary mt-4'%>
-      </div>        
-    </div>    
-  <% end %>
+  <%= link_to 'New User', new_user_path %>
 
 </div>
