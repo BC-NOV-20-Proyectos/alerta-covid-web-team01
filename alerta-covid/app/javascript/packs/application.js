@@ -4,14 +4,13 @@
 // that code so it'll be compiled.
 
 import "channels";
-import "../stylesheets/application";
 
 import * as ActiveStorage from "@rails/activestorage";
 
 import Rails from "@rails/ujs";
 import Turbolinks from "turbolinks";
 
-require("bootstrap");
+import "bootstrap";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 Rails.start();
