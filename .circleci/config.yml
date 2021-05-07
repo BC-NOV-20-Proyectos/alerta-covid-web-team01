@@ -106,6 +106,9 @@ jobs:
       - run:
           name: Compile assets
           command: cd alerta-covid && heroku run rake assets:precompile --app $HEROKU_APP_NAME
+      - run:
+          name: Create permissions
+          command: cd alerta-covid && heroku run rake permission:permissions --app $HEROKU_APP_NAME
 
 workflows:
   version: 2.1
