@@ -1,16 +1,33 @@
-<h2>Forgot your password?</h2>
+<div class="container cont-log">
+     <%= image_tag("vector.png", class: "style_vector")%>
+</div>
+<div class="container cont-log">
+  <div class="row">
+    <div class="col-6 offset-1">
+      <%= image_tag("Sanitizing.png", class: "style_sanitizing") %>
+    </div>
+    <div class="col-3">
+      <h2 class="text-center my-5">Forgot your password?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="field border-bottom">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"border-0 btn-block" %>
+        </div>
+
+        <div class="actions text-center mt-4">
+          <%= f.submit "Send me reset password instructions", class:"btn-success" %>
+        </div>
+      <% end %>
+      <div class="container my-5">
+        <div class="row">
+          <div class="col text-center">
+            <%= render "devise/shared/links" %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
