@@ -3,7 +3,7 @@
 
 .main-wrapper {
   overflow-x: hidden;
-  margin-left: 0;
+  margin-left: -15px;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -15,6 +15,7 @@
 .content {
   flex: 1;
   margin-left: 0;
+  padding: 0;
 }
 
 .bg-Light {
@@ -115,7 +116,7 @@
   height: auto;
 }
 .style_sanitizing{
-  height: 400px;
+  height: auto;
 }
 
 .cont-log{
