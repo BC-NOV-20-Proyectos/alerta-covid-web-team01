@@ -142,10 +142,30 @@
 .return-button {
   width: 5rem;
   font-size: 1.2rem;
+  color: white;
+  background-color: #007bff;
+  padding: 0.3rem;
+  border-radius: 1rem;
+  &:hover {
+    color: white;
+  }
 }
 
 .errors {
   padding: 2rem;
   background-color: red;
   color: white;
+}
+
+.edit-button {
+  width: 5rem;
+  font-size: 1.2rem;
+  color: white;
+  background-color: chocolate;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border-radius: 1rem;
+  &:hover {
+    background-color: coral;
+    color: white;
+  }
 }
