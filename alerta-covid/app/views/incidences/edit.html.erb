@@ -1,11 +1,11 @@
 <div class="container-fluid">
-	<h1 class="title">Editing Incidence</h1>
-	<div class="card shadow p-5">
-		<%= render 'form_update', incidence: @incidence %>
-		<%= link_to incidences_path, {class: "return-button"} do %>
-			<i class="fas fa-arrow-circle-left"></i>
-			 Back
-		<% end%>
-	</div>
+  <h1 class="title">Editing Incidence</h1>
+  <div class="card shadow p-5">
+    <%= render 'form_update', incidence: @incidence %>
+    <%= link_to incidences_path, {class: "return-button"} do %>
+      <i class="fas fa-arrow-circle-left"></i>
+       Back
+    <% end%>
+  </div>
 </div>
 <%= javascript_pack_tag 'incidence/edit' %>

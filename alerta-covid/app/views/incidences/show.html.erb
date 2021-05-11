@@ -1,61 +1,61 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
-	<div class="container-incidence">
-		<div class="list-symptoms">
-			<h3 class="title">My symptoms</h3>
-			<% @incidence.symptoms.each do |s| %>
-				<label class="symptom" %> >
-					<label><%=s.name%></label>
-				</label>        
-			<% end %>
-		</div>
-		<div class="covid-test">
-			<h3 class="title">About covid test</h3>
-			<div class="wrapper">
-				<div class="from-group row mt-4">
-					<label class="col-sm-4 col-form-label"> Covid Test</label>
-					<div class="col-sm-8">
-						<label class="form-control"><%= @incidence.covid_test.name%></label>
-					</div>
-				</div>
-				<div class="from-group row mt-4">
-					<label class="col-sm-4 col-form-label"> Begin Covid Test</label>
-					<div class="col-sm-8">
-						<label class="form-control"><%= @incidence.begin%></label>
-					</div>
-				</div>
-				<div class="from-group row mt-4">
-					<label class="col-sm-4 col-form-label"> Delivery Covid Test</label>
-					<div class="col-sm-8">
-						<label class="form-control"><%= @incidence.delivery%></label>
-					</div>
-				</div>
-				<div class="from-group row mt-4">
-					<label class="col-sm-4 col-form-label"> Result Covid Test</label>
-					<div class="col-sm-8">
-						<label class="form-control"><%= @incidence.result%></label>
-					</div>
-				</div>
-			</div>
-		</div>
-			<div id="places" class="places">
-			<h3 class="title">places visited</h3>
-			<div class="list-items">
-				<% @incidence.places.each do |s| %>
-					<label for=<%= s.id%> class="card place-item">
-						<%= image_tag("Sanitizing.png", class: "image-place")%>
-						<span><%=s.name%></span>
-					</label>        
-				<% end %>
-			</div>
-		</div>
-	</div>
-	<div >
-		<%= link_to incidences_path, {class: "return-button"} do %>
-			<i class="fas fa-arrow-circle-left"></i>
-			 Back
-		<% end%>
-		|
-		<%= link_to 'Edit', edit_incidence_path(@incidence), class: "edit-button" %>
-	</div>
+  <div class="container-incidence">
+    <div class="list-symptoms">
+      <h3 class="title">My symptoms</h3>
+      <% @incidence.symptoms.each do |s| %>
+        <label class="symptom" %> >
+          <label><%=s.name%></label>
+        </label>
+      <% end %>
+    </div>
+    <div class="covid-test">
+      <h3 class="title">About covid test</h3>
+      <div class="wrapper">
+        <div class="from-group row mt-4">
+          <label class="col-sm-4 col-form-label"> Covid Test</label>
+          <div class="col-sm-8">
+            <label class="form-control"><%= @incidence.covid_test.name%></label>
+          </div>
+        </div>
+        <div class="from-group row mt-4">
+          <label class="col-sm-4 col-form-label"> Begin Covid Test</label>
+          <div class="col-sm-8">
+            <label class="form-control"><%= @incidence.begin%></label>
+          </div>
+        </div>
+        <div class="from-group row mt-4">
+          <label class="col-sm-4 col-form-label"> Delivery Covid Test</label>
+          <div class="col-sm-8">
+            <label class="form-control"><%= @incidence.delivery%></label>
+          </div>
+        </div>
+        <div class="from-group row mt-4">
+          <label class="col-sm-4 col-form-label"> Result Covid Test</label>
+          <div class="col-sm-8">
+            <label class="form-control"><%= @incidence.result%></label>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div id="places" class="places">
+      <h3 class="title">places visited</h3>
+      <div class="list-items">
+        <% @incidence.places.each do |s| %>
+          <label for=<%= s.id%> class="card place-item">
+            <%= image_tag("Sanitizing.png", class: "image-place")%>
+            <span><%=s.name%></span>
+          </label>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div >
+    <%= link_to incidences_path, {class: "return-button"} do %>
+      <i class="fas fa-arrow-circle-left"></i>
+       Back
+    <% end%>
+    |
+    <%= link_to 'Edit', edit_incidence_path(@incidence), class: "edit-button" %>
+  </div>
 </div>
