@@ -2,14 +2,20 @@
 @import "bootstrap/scss/bootstrap";
 
 .main-wrapper {
+  overflow-x: hidden;
+  margin-left: -15px;
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: row;
+  padding: 0;
+  background-color: #fff;
 }
 
 .content {
   flex: 1;
+  margin-left: 0;
+  padding: 0;
 }
 
 .bg-Light {
@@ -104,4 +110,22 @@
       display: none;
     }
   }
+}
+
+.style_vector{
+  height: auto;
+}
+.style_sanitizing{
+  height: auto;
+}
+
+.cont-log{
+  display: unset;
+}
+
+.interna{
+  position: absolute;
+  top: 35%;
+  left: 35%;
+  text-align: center;
 }
