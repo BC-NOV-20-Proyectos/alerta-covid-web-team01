@@ -1,5 +1,10 @@
-<h1>New Incidence</h1>
-
-<%= render 'form', incidence: @incidence %>
-
-<%= link_to 'Back', incidences_path %>
+<div class="container-fluid">
+	<h1 class="title">New Incidence</h1>
+	<div class="card shadow p-5">
+    <%= render 'form', incidence: @incidence %>
+    <%= link_to incidences_path, { class: "return-button" } do %>
+	 		<i class="fas fa-arrow-circle-left"></i>
+			 Back
+		<% end %>
+	</div>
+</div>
