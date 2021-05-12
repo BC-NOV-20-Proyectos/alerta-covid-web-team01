@@ -1,5 +1,6 @@
 // app/javascript/stylesheets/application.scss
 @import "bootstrap/scss/bootstrap";
+@import "incidences";
 
 .main-wrapper {
   overflow-x: hidden;
@@ -9,7 +10,7 @@
   display: flex;
   flex-direction: row;
   padding: 0;
-  background-color: #fff;
+  background-color: whitesmoke;
 }
 
 .content {
@@ -112,20 +113,59 @@
   }
 }
 
-.style_vector{
+.style_vector {
   height: auto;
 }
-.style_sanitizing{
+.style_sanitizing {
   height: auto;
 }
 
-.cont-log{
+.cont-log {
   display: unset;
 }
 
-.interna{
+.interna {
   position: absolute;
   top: 35%;
   left: 35%;
   text-align: center;
+}
+
+.title {
+  margin-top: 1rem;
+  padding: 0.3 rem;
+  background-color: #155446;
+  color: white;
+  text-align: center;
+}
+
+.return-button {
+  width: 5rem;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #007bff;
+  padding: 0.3rem;
+  border-radius: 1rem;
+  &:hover {
+    color: white;
+  }
+}
+
+.errors {
+  padding: 2rem;
+  background-color: red;
+  color: white;
+}
+
+.edit-button {
+  width: 5rem;
+  font-size: 1.2rem;
+  color: white;
+  background-color: chocolate;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border-radius: 1rem;
+  &:hover {
+    background-color: coral;
+    color: white;
+  }
 }

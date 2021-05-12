@@ -1,6 +1,6 @@
 <%= form_with(model: incidence) do |form| %>
   <% if incidence.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="errors">
       <h2><%= pluralize(incidence.errors.count, "error") %> prohibited this incidence from being saved:</h2>
 
       <ul>
@@ -10,44 +10,68 @@
       </ul>
     </div>
   <% end %>
+  <div class="container-incidence">
+    <div class="list-symptoms">
+      <h3 class="title">Do you have Symptom</h3>
+      <% @symptoms.each do |s| %>
+        <label class="symptom" for=<%= s.id %>>
+          <%= check_box_tag 'symp[]', s.id, @user_symptoms.include?(s.id), disabled: true%>
+          <label for=<%= s.id%>> <%=s.name%> </label>
+        </label>     
+      <% end %>
+    </div>
+    <div class="covid-test">
+      <h3 class="title"> About covid test</h3>
+      <div class="wrapper">
+        <div class="from-group row mt-4">
+          <%= form.label :covid_test, class: "col-sm-4 col-form-label" %>
+          <div class="col-sm-8">
+            <%= select(:incidence, :covid_test_id, @tests, {}, {class: "form-control" , disabled: true} ) %>
+          </div>
+        </div>
 
-  <div>
-    <h1>Do you have Symptom</h1>
-    <% @symptoms.each do |s| %>        
-      <%= check_box_tag 'symp[]', s.id, @user_symptoms.include?(s.id), disabled: true%>
-      <%=s.name%>
-    <% end %>
-  </div>
+        <div class="form-group row mt-4">
+          <%= form.label :begin_covid_test, class: "col-4 col-form-label"%>
+          <div class="col-8">
+            <%= form.date_field :begin, { class: "form-control" , disabled: true}%>
+          </div>
+        </div>
 
-  <div>
-    <%= form.label :covid_test%>
-    <%= select(:incidence, :covid_test_id, @tests, {}, disabled: true ) %>
-  </div>
+        <div class="form-group row mt-4">
+          <%= form.label :delivery_covid_test, class: "col-4 col-form-label"%>
+          <div class="col-8">
+            <%= form.date_field :delivery, class: incidence.errors.include?(:delivery) ? "form-control is-invalid" : "form-control" %>
+          </div>
+        </div>
 
-  <div>
-    <%= form.label :begin_covid_test%>
-    <%= form.date_field :begin, disabled: true%>
-  </div>
-
-  <div>
-    <%= form.label :delivery_covid_test%>
-    <%= form.date_field :delivery %>
-  </div>
-
-  <div>
-    <%= form.label :result_covid_test%>
-    <%= form.select(:result,[[true,true],[false, false]],{},{id: "select"})%>
-  </div>
-  <div id="places">
-    <h1>Add all the places visited in the last 10 days</h1>
-    <% @places.each do |s| %>        
-      <%= check_box_tag 'places[]', s.id, @user_places.include?(s.id),{array: true, class: "check_box", enabled: true}%>
-      <%=s.name%>
-    <% end %>
+        <div class="form-group row mt-4">
+          <%= form.label :result_covid_test, class: "col-4 col-form-label"%>
+          <div class="col-8">
+            <%= form.select(:result,[[true,true],[false, false]],{},{ class: "form-control", id: "select"})%>
+          </div>
+        </div>
+        <div>
+          <%= image_tag("Sanitizing.png", class: "image-incidence") %>
+        </div>
+      </div>
+    </div>
+    <div id="places" class="places">
+      <h3 class="title">Add all the places visited in the last 10 days</h3>
+      <div class="list-items">
+        <% @places.each do |s| %>
+          <label for=<%= s.id%> class="card place-item">
+            <%= image_tag("Sanitizing.png", class: "image-place")%>
+            <span><%=s.name%></span>
+            <%= check_box_tag 'places[]', s.id, @user_places.include?(s.id),{array: true, class: "check_box", enabled: true, id: s.id}%>
+          </label>        
+        <% end %>
+      </div>
+    </div>
   </div>
   
-  <div class="actions">
-    <%= form.submit %>
+  <div class="create-incidence">
+    <%= form.submit do%>
+    <% end %>
   </div>
 
 <% end %> 
