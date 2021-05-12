@@ -1,6 +1,6 @@
 <%= form_with(model: place) do |form| %>
   <% if place.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation", class="errors">
       <h2><%= pluralize(place.errors.count, "error") %> prohibited this place from being saved:</h2>
 
       <ul>
@@ -11,16 +11,26 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="container-places">
+    <div>
+      <div class="form-group row mt-4">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group row mt-4">
+        <%= form.label :area %>
+        <%= select_tag 'place[area_id]', options_from_collection_for_select(@areas, "id", "name", @place.area_id), include_blank: "Select Area", id: 'select-area', class: "form-control"  %>
+      </div>
+
+      <div class="create-place-button">
+        <%= form.submit %>
+      </div>
+    </div>
+
+    
+      <%= image_tag("Sanitizing.png", class: "image-sanitizing")%>
+    
   </div>
 
-  <div class="field">
-    <%= select_tag 'place[area_id]', options_from_collection_for_select(@areas, "id", "name", @place.area_id), include_blank: "Select Area", class: 'form-control', id: 'select-area'  %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
