@@ -3,39 +3,35 @@
 <div class="container-fluid">
   <h1 class="title">Places</h1>
 
-  <div class="table-responsive mt-2">
-    <table class="table table-hover">
-      <thead class="thead-light">
-        <tr class="d-flex">
-          <th class="col-3">Name</th>
-          <th class="col-3">Area</th>
-          <%if user_signed_in? %>
-            <th colspan="2" width="100%"></th>
+  <div class="container-index-places">
+    <% @places.each do |place| %>
+      <div class="card shadow card-place">
+        <%= link_to image_tag("qr_codes/qrcode_#{place.id}.png", class: "qr-code"), place %>
+        <div class="flex">
+          <strong>Place:</strong> 
+          <%= place.name %>
+        </div>
+        <div class="flex">
+          <strong>Area:</strong> 
+          <%= place.area.name %>
+        </div>
+        <div class="flex">
+          <strong>Institution:</strong> 
+          <%= place.area.institution.name %>
+        </div>
+        <% if place.are_there_active_cases?%>
+          <p class="active-cases-tag"><%= place.active_cases_teen_days_ago %> active cases</p>
+        <%end%>
+        <div class="flex mt-3">
+          <% if user_signed_in? && place.area.institution_id == @current_institution.id || current_user.super_admin?%>
+            <%= link_to 'Edit', edit_place_path(place), class: "edit-button" %>
+            <%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' }, class: "destroy-button" %>
           <%end%>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @places.each do |place| %>
-          <tr class="d-flex">
-            <td class="col-3"><%= place.name %></td>
-            <td class="col-3"><%= place.area.name %></td>
-            <td class="col-4">
-              <%= link_to 'Show', place, class: "show-button" %>
-              <% if user_signed_in? && place.area.institution_id == @current_institution.id || current_user.super_admin?%>
-                <%= link_to 'Edit', edit_place_path(place), class: "edit-button" %>
-                <%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' }, class: "destroy-button" %>
-              <%end%>
-            </td>
-            <% if place.are_there_active_cases?%>
-              <td class="col-2"><p class="active-cases-tag"><%= place.active_cases_teen_days_ago %> active cases</p></td>
-            <%end%>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </div>
+      </div>
+    <% end %>
   </div>
-  
+
   <% if user_signed_in?%>
     <%= link_to 'New Place', new_place_path, class: "new-button" %>
   <% end%>
