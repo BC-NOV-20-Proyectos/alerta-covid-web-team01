@@ -1,24 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @place.name %>
-</p>
+<div class="container-fluid">
+  <h1 class="title">
+    <%= @place.name %>
+  </h1>
 
-<p>
-  <strong>Qr code:</strong>
-  <%= @place.qr_code %>
-</p>
+  <div class="container-show-place">
+    <p>
+      <%= image_tag("qr_codes/qrcode_#{@place.id}.png", class: "qr-code") %>
+    </p>
 
-<p>
-  <%= image_tag("qr_codes/qrcode_#{@place.id}.png") %>
-</p>
+    <p>
+      <strong>Qr code:</strong>
+      <%= @place.qr_code %>
+    </p>
 
-<p>
-  <strong>Area:</strong>
-  <%= @place.area.name %>
-</p>
-<% if user_signed_in? %>
-<%= link_to 'Edit', edit_place_path(@place) %> 
-<% end %>
-<%= link_to 'Back', places_path %>
+    <p>
+      <strong>Area:</strong>
+      <%= @place.area.name %>
+    </p>
+
+    <p>
+      <strong>Institution:</strong>
+      <%= @place.area.institution.name %>
+    </p>
+  </div>
+
+  <div class="flex">
+    <% if user_signed_in? %>
+      <%= link_to 'Edit', edit_place_path(@place), class: "edit-button" %> |
+    <% end %>
+    <%= link_to 'Back', places_path, class: "return-button" %>
+  </div>
+</div>
