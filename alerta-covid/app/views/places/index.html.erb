@@ -1,37 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Places</h1>
+<div class="container-fluid">
+  <h1 class="title">Places</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Area</th>
-      <%if user_signed_in? %>
-        <th colspan="4"></th>
-      <%end%>
-    </tr>
-  </thead>
-
-  <tbody>
+  <div class="container-index-places">
     <% @places.each do |place| %>
-      <tr>
-        <td><%= place.name %></td>
-        <td><%= place.area.name %></td>
+      <div class="card shadow card-place">
+        <%= link_to image_tag("qr_codes/qrcode_#{place.id}.png", class: "qr-code"), place %>
+        <div class="flex">
+          <strong>Place:</strong> 
+          <%= place.name %>
+        </div>
+        <div class="flex">
+          <strong>Area:</strong> 
+          <%= place.area.name %>
+        </div>
+        <div class="flex">
+          <strong>Institution:</strong> 
+          <%= place.area.institution.name %>
+        </div>
         <% if place.are_there_active_cases?%>
-          <td bgcolor="red"><%= place.active_cases_teen_days_ago%> active cases</td>
+          <p class="active-cases-tag"><%= place.active_cases_teen_days_ago %> active cases</p>
         <%end%>
-        <td><%= link_to 'Show', place %></td>
-        <% if user_signed_in? && place.area.institution_id == @current_institution.id || current_user.super_admin?%>
-          <td><%= link_to 'Edit', edit_place_path(place) %></td>
-          <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <%end%>
-      </tr>
+        <div class="flex mt-3">
+          <% if user_signed_in? && place.area.institution_id == @current_institution.id || current_user.super_admin?%>
+            <%= link_to 'Edit', edit_place_path(place), class: "edit-button" %>
+            <%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' }, class: "destroy-button" %>
+          <%end%>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<br>
-<% if user_signed_in?%>
-  <%= link_to 'New Place', new_place_path %>
-<% end%>
+  <% if user_signed_in?%>
+    <%= link_to 'New Place', new_place_path, class: "new-button" %>
+  <% end%>
+</div>

@@ -1,6 +1,7 @@
 // app/javascript/stylesheets/application.scss
 @import "bootstrap/scss/bootstrap";
 @import "incidences";
+@import "places";
 
 .main-wrapper {
   overflow-x: hidden;
@@ -133,10 +134,16 @@
 
 .title {
   margin-top: 1rem;
-  padding: 0.3 rem;
+  padding: 0.3rem;
   background-color: #155446;
   color: white;
   text-align: center;
+}
+
+.errors {
+  padding: 2rem;
+  background-color: red;
+  color: white;
 }
 
 .return-button {
@@ -146,15 +153,27 @@
   background-color: #007bff;
   padding: 0.3rem;
   border-radius: 1rem;
+  text-align: center;
+  margin-top: 1rem;
   &:hover {
     color: white;
+    text-decoration: none;
   }
 }
 
-.errors {
-  padding: 2rem;
-  background-color: red;
+.show-button {
+  width: 5rem;
+  font-size: 1.2rem;
   color: white;
+  background-color: #2aab20;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  &:hover {
+    background-color: #3fd633;
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .edit-button {
@@ -164,8 +183,40 @@
   background-color: chocolate;
   padding: 0.3rem 1rem 0.3rem 1rem;
   border-radius: 1rem;
+  text-align: center;
   &:hover {
     background-color: coral;
     color: white;
+    text-decoration: none;
+  }
+}
+
+.destroy-button {
+  width: 5rem;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #c70000;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  &:hover {
+    background-color: #db4b4b;
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.new-button {
+  width: 5rem;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #1428ba;
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  border-radius: 1rem;
+  text-align: center;
+  &:hover {
+    background-color: #384ef2;
+    color: black;
+    text-decoration: none;
   }
 }

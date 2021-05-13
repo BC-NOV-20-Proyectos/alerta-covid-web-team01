@@ -1,6 +1,12 @@
-<h1>Editing Place</h1>
+<div class="container-fluid">
+  <h1 class="title">Editing Place</h1>
 
-<%= render 'form', place: @place, areas: @areas %>
+  <div class="card shadow p-5">
+    <%= render 'form', place: @place, areas: @areas %>
 
-<%= link_to 'Show', @place %> |
-<%= link_to 'Back', places_path %>
+    <div class="flex">
+      <%= link_to 'Show', @place, class: "show-button" %> |
+      <%= link_to 'Back', places_path, class: "return-button" %>
+    </div>
+  </div>
+</div>
