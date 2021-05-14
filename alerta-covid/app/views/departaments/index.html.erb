@@ -1,29 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Departaments</h1>
+<div class="container table-responsive">
+  <h1 class="title">Departaments</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Institution</th>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @departaments.each do |departament| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= departament.institution.name %></td>
-        <td><%= departament.name %></td>
-        <td><%= link_to 'Show', departament %></td>
-        <td><%= link_to 'Edit', edit_departament_path(departament) %></td>
-        <td><%= link_to 'Destroy', departament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Institution</th>
+        <th>Name</th>
+        <th colspan="3">Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @departaments.each do |departament| %>
+        <tr>
+          <td><%= departament.institution.name %></td>
+          <td><%= departament.name %></td>
+          <td><%= link_to 'Show', departament, class: "btn btn-success" %></td>
+          <td><%= link_to 'Edit', edit_departament_path(departament), class: "btn btn-warning" %></td>
+          <td><%= link_to 'Destroy', departament, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Departament', new_departament_path %>
+  <br>
+
+  <%= link_to 'New Departament', new_departament_path, class: "new-button" %>
+</div>

@@ -1,36 +1,37 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container-fluid">
-  <h1 class="title">Incidences</h1>
-
-  <table>
-    <thead>
-      <tr>
-        <th>type test</th>
-        <th>Open</th>
-        <th>Result</th>
-        <th>Close</th>
-        <th>Symptom</th>
-        <th colspan="3">Actions</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @incidences.each do |incidence| %>
+  <h1 class="title">My Incidences</h1>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
         <tr>
-          <td><%= incidence.covid_test.name%></td>
-          <td><%= time_ago_in_words(incidence.open)%></td>
-          <td><%= incidence.result ? incidence.result : "Pending"%></td>
-          <td><%= incidence.close ? time_ago_in_words(incidence.close) : "Pending"%></td>
-          <td><%= incidence.has_symptoms%></td>
-          <td><%= link_to 'Show', incidence %></td>
-          <td><%= link_to 'Edit', edit_incidence_path(incidence) %></td>
+          <th>type test</th>
+          <th>Open</th>
+          <th>Result</th>
+          <th>Close</th>
+          <th>Symptom</th>
+          <th colspan="3">Actions</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @incidences.each do |incidence| %>
+          <tr>
+            <td><%= incidence.covid_test.name%></td>
+            <td><%= time_ago_in_words(incidence.open)%></td>
+            <td><%= !incidence.result.nil? ? incidence.result : "Pending"%></td>
+            <td><%= incidence.close ? time_ago_in_words(incidence.close) : "Pending"%></td>
+            <td><%= incidence.has_symptoms%></td>
+            <td><%= link_to 'Show', incidence, class: "btn btn-success" %></td>
+            <td><%= link_to 'Update Result', edit_incidence_path(incidence), class: "btn btn-warning" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
   <br>
 
-  <%= link_to 'New Incidence', new_incidence_path %>
+  <%= link_to 'New Incidence', new_incidence_path, class: "new-button" %>
 </div>
