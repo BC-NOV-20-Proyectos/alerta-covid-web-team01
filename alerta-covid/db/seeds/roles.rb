@@ -1,7 +1,8 @@
 roles = [
   { name: 'Super Admin' },
-  { name: 'Data Reporter' },
-  { name: 'Customer' },
+  { name: 'Admin Institution' },
+  { name: 'Final User' },
+  { name: 'Data Reporter' }
 ]
 
 p 'Creating roles'
@@ -9,5 +10,7 @@ p 'Creating roles'
 roles.each { |role|
   admn = Role.find_or_create_by(name: role[:name])
 }
+
+Role.first << Permission.all
 
 puts "#{Role.count} of #{roles.size} roles created"
