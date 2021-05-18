@@ -25,7 +25,7 @@
         <div class="flex mt-3">
           <% if user_signed_in? && place.area.institution_id == @current_institution.id || current_user.super_admin?%>
             <%= link_to 'Edit', edit_place_path(place), class: "edit-button" %>
-            <%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' }, class: "destroy-button" %>
+            <%= button_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' }, class: "destroy-button" %>
           <%end%>
         </div>
       </div>
