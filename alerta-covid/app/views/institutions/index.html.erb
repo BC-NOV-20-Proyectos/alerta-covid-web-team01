@@ -15,7 +15,7 @@
         <td><%= link_to 'Show', institution %></td>
         <%if current_user.super_admin?%>
           <td><%= link_to 'Edit', edit_institution_path(institution) %></td>
-          <td><%= link_to 'Destroy', institution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= button_to 'Destroy', institution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <%end%>
       </tr>
     <% end %>
