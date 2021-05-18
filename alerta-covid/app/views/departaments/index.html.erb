@@ -18,7 +18,7 @@
         <td><%= departament.name %></td>
         <td><%= link_to 'Show', departament %></td>
         <td><%= link_to 'Edit', edit_departament_path(departament) %></td>
-        <td><%= link_to 'Destroy', departament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Destroy', departament, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
