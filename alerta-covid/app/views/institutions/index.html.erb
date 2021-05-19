@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container container-form ">
   <h1 class="title">Institutions</h1>
   <table class="table table-striped">
     <thead>
@@ -22,6 +22,8 @@
   </table>
   <br>
   <%if current_user.super_admin?%>
-    <%= link_to 'New Institution', new_institution_path, class: "new-button" %>
+    <div class="container">
+      <%= link_to 'New Institution', new_institution_path, class: "new-button" %>
+    </div>
   <%end%>
 </div>
