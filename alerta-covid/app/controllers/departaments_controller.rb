@@ -1,6 +1,6 @@
 class DepartamentsController < ApplicationController
   before_action :set_departament, only: %i[ show edit update destroy ]
-  before_action :get_institutions, only: %i[ new edit]
+  before_action :get_institutions, only: %i[ new edit create]
 
   load_and_authorize_resource
   before_action :load_permissions

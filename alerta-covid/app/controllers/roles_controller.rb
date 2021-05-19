@@ -31,6 +31,7 @@ class RolesController < ApplicationController
     @role = Role.new(role_params)
     @role.permissions = []
     @role.set_permissions(params[:permissions]) if params[:permissions]
+    @permissions = Permission.all.map{ |i| i if (["all"].exclude? i.subject_class) }.compact
     if @role.save
       redirect_to @role, notice: "Role was successfully created."
     else

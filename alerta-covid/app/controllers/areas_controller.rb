@@ -3,7 +3,7 @@ class AreasController < ApplicationController
   
   load_and_authorize_resource
   before_action :load_permissions
-  before_action :get_institutions, only: %i[ new edit]
+  before_action :get_institutions, only: %i[ new edit create]
 
   # GET /areas or /areas.json
   def index
