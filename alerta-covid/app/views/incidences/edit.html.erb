@@ -2,10 +2,13 @@
   <h1 class="title">Editing Incidence</h1>
   <div class="card shadow p-5">
     <%= render 'form_update', incidence: @incidence %>
-    <%= link_to incidences_path, {class: "return-button"} do %>
-      <i class="fas fa-arrow-circle-left"></i>
-       Back
-    <% end%>
   </div>
+</div>
+<div class="container-fluid">
+  <%= link_to incidences_path, { class: "btn return-button mt-5 mb-5"} do %>
+    <i class="fas fa-arrow-circle-left"></i>
+    Back
+  <% end %>
+  <%= link_to 'show', @incidence, class: "btn btn-success" %>
 </div>
 <%= javascript_pack_tag 'incidence/edit' %>
