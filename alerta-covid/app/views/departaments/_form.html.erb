@@ -14,16 +14,16 @@
 
     <%if current_user.super_admin?%>
       <div class="form-group row">
-        <label for="" class="col-2 col-control-label">Institution</label>
-        <div class="col-10">
+        <label for="" class="col-lg-2 col-sm-12 col-control-label">Institution</label>
+        <div class="col-lg-10 col-sm-12">
           <%= select_tag 'departament[institution_id]', options_from_collection_for_select(@institutions, "id", "name", @departament.institution_id), include_blank: "Select institution", class: 'form-control', id: 'select-institution'  %>
         </div>
       </div>
     <%end%>
 
     <div class="form-group row">
-      <%= form.label :name, class: "col-2 col-control-label" %>
-      <div class="col-10">
+      <%= form.label :name, class: "col-lg-2 col-sm-12 col-control-label" %>
+      <div class="col-lg-10 col-sm-12">
         <%= form.text_field :name, class: "form-control" %>
       </div>
     </div>

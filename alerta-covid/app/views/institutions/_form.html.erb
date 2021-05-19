@@ -12,8 +12,8 @@
   <% end %>
   <div class="card p-5">
     <div class="form-group row">
-      <%= form.label :name, class: "form-control-label col-2" %>
-      <div class="col-10">
+      <%= form.label :name, class: "form-control-label col-lg-2 col-sm-12" %>
+      <div class="col-lg-10 col-sm-12">
         <%= form.text_field :name, class: institution.errors.include?(:name) ? "form-control is-invalid" : "form-control" %>
       </div>
     </div>
