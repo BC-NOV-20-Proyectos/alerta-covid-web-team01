@@ -26,5 +26,11 @@
     </table>
   </div>
 
-  <%= link_to 'New Area', new_area_path, class: "new-button" %>
+  <div class="mt-2 mb-3 col-xs-12">
+    <%= will_paginate(@areas, :renderer => WillPaginate::ActionView::LinkRenderer, class: 'pagination-sm justify-content-center') %>
+  </div>
+
+  <div class="mt-2 col-xs-12">
+    <%= link_to 'New Role', new_area_path, class: 'new-button' %>
+  </div>
 </div>
