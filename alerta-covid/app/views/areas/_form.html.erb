@@ -1,28 +1,35 @@
-<%= form_with(model: area) do |form| %>
-  <% if area.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(area.errors.count, "error") %> prohibited this area from being saved:</h2>
+<div class="card p-5">
+  <%= form_with(model: area) do |form| %>
+    <% if area.errors.any? %>
+      <div id="error_explanation" class="errors">
+        <h2><%= pluralize(area.errors.count, "error") %> prohibited this area from being saved:</h2>
 
-      <ul>
-        <% area.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% area.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%if current_user.super_admin?%>
+      <div class="form-group row">
+        <label for="" class="col-2 col-form-label">Institution</label>
+        <div class="col-10">
+          <%= select_tag 'area[institution_id]', options_from_collection_for_select(@institutions, "id", "name", @area.institution_id), include_blank: "Select Institution", class: 'form-control', id: 'select-institution'  %>
+        </div>
+      </div>
+    <%end%>
+
+    <div class="form-group row">
+      <%= form.label :name, class: "col-2 col-form-label" %>
+      <div class="col-10">
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-info w-100" %>
     </div>
   <% end %>
-
-  <%if current_user.super_admin?%>
-    <div class="field">
-      <%= select_tag 'area[institution_id]', options_from_collection_for_select(@institutions, "id", "name", @area.institution_id), include_blank: "Select Area", class: 'form-control', id: 'select-institution'  %>
-    </div>
-  <%end%>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

@@ -1,6 +1,13 @@
-<h1>Editing Area</h1>
+<div class="container">
+  <h1 class="title">Editing Area</h1>
 
-<%= render 'form', area: @area %>
+  <%= render 'form', area: @area %>
 
-<%= link_to 'Show', @area %> |
-<%= link_to 'Back', areas_path %>
+</div>
+<div class="container">
+  <%= link_to areas_path, { class: "btn return-button mt-5 mb-5"} do %>
+    <i class="fas fa-arrow-circle-left"></i>
+    Back
+  <% end %>
+  <%= link_to 'Show', @area, class: "btn btn-success" %>
+</div>
