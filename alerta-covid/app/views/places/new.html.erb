@@ -1,8 +1,13 @@
 <div class="container-fluid">
   <h1 class="title">New Place</h1>
 
-  <div class="card shadow p-5">
+  <div class="card shadow p-5 mb-2">
     <%= render 'form', place: @place, areas: @areas %>
-    <%= link_to 'Back', places_path, class: "return-button"  %>
   </div>
+</div>
+<div class="container-fluid">
+  <%= link_to places_path, { class: "btn return-button" } do %>
+     <i class="fas fa-arrow-circle-left"></i>
+     Back
+  <% end %>
 </div>

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container-fluid">
+<div class="container-fluid mb-3">
   <h1 class="title">
     <%= @place.name %>
   </h1>
@@ -25,11 +25,14 @@
       <%= @place.area.institution.name %>
     </p>
   </div>
-
-  <div class="flex">
-    <% if user_signed_in? %>
-      <%= link_to 'Edit', edit_place_path(@place), class: "edit-button" %> |
-    <% end %>
-    <%= link_to 'Back', places_path, class: "return-button" %>
-  </div>
+</div>
+<div class="container-fluid">
+  <%= link_to places_path, { class: "btn return-button" } do %>
+     <i class="fas fa-arrow-circle-left"></i>
+     Back
+  <% end %>
+  <% if user_signed_in? %>
+    <%= link_to 'Edit', edit_place_path(@place), class: "btn btn-warning" %>
+  <% end %>
+  
 </div>
