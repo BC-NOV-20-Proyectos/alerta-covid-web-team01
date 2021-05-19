@@ -2,29 +2,49 @@
 
   <h1 class="mt-2">Super Admin: Listing Roles</h1>
 
-  <div class='table-responsive mt-4'>
-    <table class='table table-hover'>
-      <thead class='thead-light'>
-        <tr>
-          <th>Name</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+  <div class="row">
+    <div class="col-12">
+      <div class='table-responsive mt-4'>
+        <table class='table table-hover'>
+          <thead class='thead-light'>
+            <tr>
+              <th>Name</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
 
-      <tbody>
-        <% @roles.each do |role| %>
-          <tr>
-            <td><%= role.name %></td>
-            <td>
-                <a href="<%= edit_role_path(role) %>" class="btn btn-sm btn-info">Edit</a>
-                <a href="<%= role_path(role) %>" class="btn btn-sm btn-warning">Show</a>
-                <%= button_to 'Destroy', role, method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: 'Are you sure?' } %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+          <tbody>
+            <% @roles.each do |role| %>
+              <tr>
+                <td><%= role.name %></td>
+                <td>
+                  <a href="<%= edit_role_path(role) %>" class="btn btn-sm btn-info">Edit</a>
+                  <a href="<%= role_path(role) %>" class="btn btn-sm btn-warning mt-1 mb-1">Show</a>
+                  <button class="btn btn-sm btn-danger" onclick="confirmDelete(<%= role.id %>)">Delete</button>
+                  <%= button_to 'Destroy', role, method: :delete, style: 'display: none;', id: "delete-role-#{role.id}" %>
+                </td>
+              </tr>
+            <% end %>
+            <script>
+              function confirmDelete(id){
+                var x = confirm("Are you sure you want to delete?");
+                if (x)
+                  document.getElementById(`delete-role-${id}`).click();
+                else
+                  return false;
+              }
+            </script>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mt-2 col-xs-12">
+    <%= will_paginate(@roles, :renderer => WillPaginate::ActionView::LinkRenderer, class: 'pagination-sm justify-content-center') %>
   </div>
 
-  <%= link_to 'New Role', new_role_path %>
+  <div class="mt-2 col-xs-12">
+    <%= link_to 'New Role', new_role_path, class: 'btn btn-sm btn-primary' %>
+  </div>
 </div>

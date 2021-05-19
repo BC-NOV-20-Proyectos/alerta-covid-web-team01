@@ -1,29 +1,53 @@
-<p id="notice"><%= notice %></p>
+<div class='container'>
 
-<h1>Areas</h1>
+  <h1 class="mt-2">Areas</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Institution</th>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="row">
+    <div class="col-12">
+      <div class='table-responsive mt-4'>
+        <table class='table table-hover'>
+          <thead class='thead-light'>
+            <tr>
+              <th>Institution</th>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
 
-  <tbody>
-    <% @areas.each do |area| %>
-      <tr>
-        <td><%= area.institution.name %></td>
-        <td><%= area.name %></td>
-        <td><%= link_to 'Show', area %></td>
-        <td><%= link_to 'Edit', edit_area_path(area) %></td>
-        <td><%= button_to 'Destroy', area, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <tbody>
+            <% @areas.each do |area| %>
+              <tr>
+                <td><%= area.institution.name %></td>
+                <td><%= area.name %></td>
+                <td>
+                  <%= link_to 'Edit', edit_area_path(area), class: "btn btn-sm btn-info" %>
+                  <%= link_to 'Show', area, class: "btn btn-sm btn-warning mt-1 mb-1" %>
+                  <button class="btn btn-sm btn-danger" onclick="confirmDelete(<%= area.id %>)">Delete</button>
+                  <%= button_to 'Destroy', area, method: :delete, style: 'display: none;', id: "delete-area-#{area.id}" %>
+                </td>
+              </tr>
+            <% end %>
+            <script>
+              function confirmDelete(id){
+                var x = confirm("Are you sure you want to delete?");
+                if (x)
+                  document.getElementById(`delete-role-${id}`).click();
+                else
+                  return false;
+              }
+            </script>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mt-2 col-xs-12">
+    <%= will_paginate(@areas, :renderer => WillPaginate::ActionView::LinkRenderer, class: 'pagination-sm justify-content-center') %>
+  </div>
 
-<br>
+  <div class="mt-2 col-xs-12">
+    <%= link_to 'New Role', new_area_path, class: 'btn btn-sm btn-primary' %>
+  </div>
+</div>
 
-<%= link_to 'New Area', new_area_path %>

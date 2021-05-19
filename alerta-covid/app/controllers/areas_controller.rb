@@ -8,9 +8,9 @@ class AreasController < ApplicationController
   # GET /areas or /areas.json
   def index
     if(current_user.super_admin?)
-      @areas = Area.all.order(:institution_id)
+      @areas = Area.all.order(:institution_id).paginate(page: params[:page], per_page: 15)
     else
-      @areas = Area.all.includes(:institution).where(institution_id: current_institution.id)
+      @areas = Area.all.includes(:institution).where(institution_id: current_institution.id).paginate(page: params[:page], per_page: 15)
     end
   end
 

@@ -11,6 +11,11 @@ roles.each { |role|
   admn = Role.find_or_create_by(name: role[:name])
 }
 
-Role.first.permissions << Permission.all
+permissions = Permission.all.pluck(:id).compact
+
+permissions.each do |id|
+  permission = Permission.find(id)
+  Role.first.permissions << permission
+end
 
 puts "#{Role.count} of #{roles.size} roles created"
