@@ -19,7 +19,7 @@
           <td><%= departament.name %></td>
           <td><%= link_to 'Show', departament, class: "btn btn-success" %></td>
           <td><%= link_to 'Edit', edit_departament_path(departament), class: "btn btn-warning" %></td>
-          <td><%= link_to 'Destroy', departament, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+          <td><%= button_to 'Destroy', departament, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
         </tr>
       <% end %>
     </tbody>

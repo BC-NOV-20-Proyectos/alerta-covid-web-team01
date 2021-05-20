@@ -22,7 +22,7 @@
               <a href="<%= role_path(role) %>" class="btn btn-warning">Show</a>
             </td>
             <td>
-              <%= link_to 'Destroy', role, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+              <%= button_to 'Destroy', role, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
         <% end %>

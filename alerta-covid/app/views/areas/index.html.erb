@@ -19,14 +19,12 @@
             <td><%= area.name %></td>
             <td><%= link_to 'Show', area, class: "btn btn-success" %></td>
             <td><%= link_to 'Edit', edit_area_path(area), class: "btn btn-warning" %></td>
-            <td><%= link_to 'Destroy', area, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+            <td><%= button_to 'Destroy', area, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
-
-  <br>
 
   <%= link_to 'New Area', new_area_path, class: "new-button" %>
 </div>
