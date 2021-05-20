@@ -1,28 +1,35 @@
-<%= form_with(model: departament) do |form| %>
-  <% if departament.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(departament.errors.count, "error") %> prohibited this departament from being saved:</h2>
+<div class="card p-5">
+  <%= form_with(model: departament) do |form| %>
+    <% if departament.errors.any? %>
+      <div id="error_explanation" class="errors">
+        <h2><%= pluralize(departament.errors.count, "error") %> prohibited this departament from being saved:</h2>
 
-      <ul>
-        <% departament.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% departament.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%if current_user.super_admin?%>
+      <div class="form-group row">
+        <label for="" class="col-lg-2 col-sm-12 col-control-label">Institution</label>
+        <div class="col-lg-10 col-sm-12">
+          <%= select_tag 'departament[institution_id]', options_from_collection_for_select(@institutions, "id", "name", @departament.institution_id), include_blank: "Select institution", class: 'form-control', id: 'select-institution'  %>
+        </div>
+      </div>
+    <%end%>
+
+    <div class="form-group row">
+      <%= form.label :name, class: "col-lg-2 col-sm-12 col-control-label" %>
+      <div class="col-lg-10 col-sm-12">
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-info w-100" %>
     </div>
   <% end %>
-
-  <%if current_user.super_admin?%>
-    <div class="field">
-      <%= select_tag 'departament[institution_id]', options_from_collection_for_select(@institutions, "id", "name", @departament.institution_id), include_blank: "Select institution", class: 'form-control', id: 'select-institution'  %>
-    </div>
-  <%end%>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

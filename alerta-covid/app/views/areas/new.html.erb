@@ -1,5 +1,12 @@
-<h1>New Area</h1>
+<div class="container">
+  <h1 class="title">New Area</h1>
 
-<%= render 'form', area: @area %>
+  <%= render 'form', area: @area %>
+</div>
 
-<%= link_to 'Back', areas_path %>
+<div class="container">
+  <%= link_to areas_path, { class: "btn return-button mt-5 mb-5"} do %>
+    <i class="fas fa-arrow-circle-left"></i>
+    Back
+  <% end %>
+</div>

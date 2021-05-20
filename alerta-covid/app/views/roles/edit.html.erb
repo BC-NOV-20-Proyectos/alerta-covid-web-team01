@@ -1,41 +1,36 @@
 <div class='container'>
+  <%= form_with(model: @role) do |form| %>
+    <h1 class="title"><%= @role.name %></h1>
+    <h6 class="mt-2">Permissions</h6>
 
-    <%= form_with(model: @role) do |form| %>
-        
-        <div class="form-group mt-4">
-            <h6 class="mt-2">Name</h6>
-            <label class="form-control"><%= @role.name %></label>
-        </div>
-        
-        <br>
-        
-        <h6 class="mt-2">Permissions</h6>
+    <div class='table-responsive mt-4'>
+      <table class='table table-hover'>
+        <thead>
+          <tr>
+						<th>Class</th>
+						<th>Action</th>
+						<th><%= check_box_tag('main', 0, false) %></th>
+          </tr>
+        </thead>
+				<tbody>
+          <% @permissions.each do |permission| %>
+            <tr>
+							<td><%= permission.subject_class %></td>
+							<td><%= permission.action %></td>
+							<td><%= check_box_tag 'permissions[]', permission.id, @role_permissions.include?(permission.id), {array: true, class: "check_box"} %></td>
+          	</tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
-        <div class='table-responsive mt-4'>
-            <table class='table table-hover'>
-            <thead class='thead-light'>
-                <tr>
-                <th>Class</th>
-                <th>Action</th>
-                <th><%= check_box_tag('main', 0, false) %></th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <% @permissions.each do |permission| %>
-                <tr>
-                    <td><%= permission.subject_class %></td>
-                    <td><%= permission.action %></td>
-                    <td><%= check_box_tag 'permissions[]', permission.id, @role_permissions.include?(permission.id), {array: true, class: "check_box"} %></td>
-                </tr>
-                <% end %>
-            </tbody>
-            </table>
-        </div>
-
-        <div class="actions">
-            <%= form.submit "Update Role", class: 'btn btn-md btn-primary' %>
-        </div>
-    <% end %>
-
+    <div class="actions">
+      <%= form.submit "Update Role", class: 'btn btn-info w-100' %>
+    </div>
+  <% end %>
+</div>
+<div class="container">
+  <div class="actions">
+      <button class="btn btn-info">awdaw</button>
+    </div>
 </div>

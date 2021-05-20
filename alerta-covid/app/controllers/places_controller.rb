@@ -4,7 +4,7 @@ class PlacesController < ApplicationController
   load_and_authorize_resource
   before_action :load_permissions
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :get_areas, only: %i[ new edit]
+  before_action :get_areas, only: %i[ new edit create]
 
   # GET /places or /places.json
   def index

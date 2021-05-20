@@ -22,10 +22,10 @@
         <% if place.are_there_active_cases?%>
           <p class="active-cases-tag"><%= place.active_cases_teen_days_ago %> active cases</p>
         <%end%>
-        <div class="flex mt-3">
+        <div class="flex mt-3 ">
           <% if user_signed_in? && place.area.institution_id == @current_institution.id || current_user.super_admin?%>
-            <%= link_to 'Edit', edit_place_path(place), class: "edit-button" %>
-            <%= button_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' }, class: "destroy-button" %>
+            <%= link_to 'Edit', edit_place_path(place), class: "btn btn-warning" %>
+            <%= button_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
           <%end%>
         </div>
       </div>

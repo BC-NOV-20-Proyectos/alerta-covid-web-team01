@@ -1,4 +1,5 @@
 class Role < ApplicationRecord
+    validates :name, presence: true
     has_many :users
     has_and_belongs_to_many :permissions
     after_destroy :delete_permissions_role

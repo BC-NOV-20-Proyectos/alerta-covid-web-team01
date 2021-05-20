@@ -1,14 +1,23 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <h1 class="title">Department Details</h1>
+  <div class="card p-5">
+    <p>
+      <strong>Institution:</strong>
+      <%= @departament.institution.name %>
+    </p>
 
-<p>
-  <strong>Institution:</strong>
-  <%= @departament.institution.name %>
-</p>
+    <p>
+      <strong>Name:</strong>
+      <%= @departament.name %>
+    </p>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @departament.name %>
-</p>
-
-<%= link_to 'Edit', edit_departament_path(@departament) %> |
-<%= link_to 'Back', departaments_path %>
+<div class="container">
+  <%= link_to departaments_path, { class: "btn return-button mt-5 mb-5"} do %>
+    <i class="fas fa-arrow-circle-left"></i>
+    Back
+  <% end %>
+  <%= link_to 'Edit', edit_departament_path(@departament), class: "btn btn-warning" %>
+</div>

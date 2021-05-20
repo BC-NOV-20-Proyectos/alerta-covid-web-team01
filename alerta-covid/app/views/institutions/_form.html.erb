@@ -1,6 +1,6 @@
 <%= form_with(model: institution) do |form| %>
   <% if institution.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="errors">
       <h2><%= pluralize(institution.errors.count, "error") %> prohibited this institution from being saved:</h2>
 
       <ul>
@@ -10,13 +10,16 @@
       </ul>
     </div>
   <% end %>
+  <div class="card p-5">
+    <div class="form-group row">
+      <%= form.label :name, class: "form-control-label col-lg-2 col-sm-12" %>
+      <div class="col-lg-10 col-sm-12">
+        <%= form.text_field :name, class: institution.errors.include?(:name) ? "form-control is-invalid" : "form-control" %>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+    <div class="d-flex flex-column ">
+      <%= form.submit class: "btn btn-info" %>
+    </div>
   </div>
 <% end %>

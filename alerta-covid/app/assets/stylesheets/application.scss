@@ -2,16 +2,19 @@
 @import "bootstrap/scss/bootstrap";
 @import "incidences";
 @import "places";
+@import "tables";
 
 .main-wrapper {
-  overflow-x: hidden;
-  margin-left: -15px;
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: row;
   padding: 0;
   background-color: whitesmoke;
+}
+
+.container-form {
+  height: 80%;
 }
 
 .content {
@@ -77,6 +80,8 @@
   .side-item {
     padding-left: 1rem;
     cursor: pointer;
+    overflow-x: hidden;
+    overflow-y: hidden;
     &:hover {
       background-color: #155446;
     }
@@ -93,6 +98,24 @@
     display: flex;
     &:focus {
       outline: none;
+    }
+  }
+
+  @media (max-width: 992px) {
+    width: 4rem;
+    .side-item-home,
+    .side-item {
+      padding-left: 0rem;
+      i {
+        margin-left: 25%;
+        &::before {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      span {
+        display: none;
+      }
     }
   }
 }
@@ -144,20 +167,16 @@
   padding: 2rem;
   background-color: red;
   color: white;
+  margin: 1.2rem 0rem 1.2rem 0rem;
 }
 
 .return-button {
-  width: 5rem;
-  font-size: 1.2rem;
   color: white;
   background-color: #007bff;
-  padding: 0.3rem;
-  border-radius: 1rem;
-  text-align: center;
-  margin-top: 1rem;
   &:hover {
     color: white;
     text-decoration: none;
+    background-color: #384ef2;
   }
 }
 
