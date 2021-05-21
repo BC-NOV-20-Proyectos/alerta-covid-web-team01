@@ -2,13 +2,24 @@ class ReportsController < ApplicationController
 
   def users
     authorize! :users, ReportsController
-    commit = params[:commit]
-    @reports = get_reports_by_users(commit)
+    @reports = get_reports_by_users(params[:commit])
+    respond_to do |format|
+      format.html
+      format.json
+      format.csv { send_data @reports.to_csv, filename: "users-#{Date.today}.csv" }
+      format.pdf { render template: 'reports/docu', pdf: 'docu' }
+    end 
   end
 
   def places
     authorize! :places, ReportsController
     @reports = get_reports_by_places(params[:option], params[:commit])
+    respond_to do |format|
+      format.html
+      format.json
+      format.csv { send_data @reports.to_csv, filename: "places-#{Date.today}.csv" }
+      format.pdf { render template: 'reports/docp', pdf: 'docp' }
+    end 
   end
 
   private
