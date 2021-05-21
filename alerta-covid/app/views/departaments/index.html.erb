@@ -25,7 +25,11 @@
     </tbody>
   </table>
 
-  <br>
+  <div class="mt-2 mb-3 col-xs-12">
+    <%= will_paginate(@departaments, :renderer => WillPaginate::ActionView::LinkRenderer, class: 'pagination-sm justify-content-center') %>
+  </div>
 
-  <%= link_to 'New Departament', new_departament_path, class: "new-button" %>
+  <div class="mt-2 col-xs-12">
+    <%= link_to 'New Departament', new_departament_path, class: "new-button" %>
+  </div>  
 </div>
