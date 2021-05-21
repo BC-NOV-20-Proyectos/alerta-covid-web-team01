@@ -12,8 +12,8 @@
   <tbody>
     <% @reports.each do |report|%>
         <tr>
-          <td><%= report.area.institution.name%> </td>
-          <td><%= report.area.name%> </td> 
+          <td><%= report.area&.institution&.name%> </td>
+          <td><%= report.area&.name%> </td> 
           <td><%= report.name%> </td> 
           <td><%= report.incidences.select{ |incidence| incidence.has_symptoms? }.count %> </td>
           <td><%= report.incidences.select{ |incidence| incidence.result == true }.count %> </td> 

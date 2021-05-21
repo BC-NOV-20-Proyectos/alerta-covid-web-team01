@@ -14,10 +14,10 @@
   <tbody>
     <% @reports.each do |report|%>
         <tr>
-          <td><%= report.user.departament.institution.name%> </td>
-          <td><%= report.user.departament.name%> </td> 
-          <td><%= report.user.full_name%> </td> 
-          <td><%= report.user.lastname%> </td> 
+          <td><%= report.user&.departament&.institution&.name%> </td>
+          <td><%= report.user&.departament&.name%> </td> 
+          <td><%= report.user&.full_name%> </td> 
+          <td><%= report.user&.lastname%> </td> 
           <td><%= report.has_symptoms? ? "X" : ""%> </td>
           <td><%= report.result ? "X" : ""%> </td> 
 					<td><%= report.result ? "" : "X"%> </td> 
