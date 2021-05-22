@@ -59,11 +59,13 @@
       <h3 class="title">Add all the places visited in the last 10 days</h3>
       <div class="list-items">
         <% @places.each do |s| %>
-          <label for=<%= s.id%> class="card place-item">
-            <%= image_tag("Sanitizing.png", class: "image-place")%>
-            <span><%=s.name%></span>
-            <%= check_box_tag 'places[]', s.id, @user_places.include?(s.id),{array: true, class: "check_box", enabled: true, id: s.id}%>
-          </label>        
+          <% if s.area.institution_id == @current_institution.id || current_user.super_admin? %>
+            <label for=<%= s.id%> class="card place-item">
+              <%= image_tag("Sanitizing.png", class: "image-place")%>
+              <span><%=s.name%></span>
+              <%= check_box_tag 'places[]', s.id, @user_places.include?(s.id),{array: true, class: "check_box", enabled: true, id: s.id}%>
+            </label>
+          <% end %>
         <% end %>
       </div>
     </div>
