@@ -1,0 +1,29 @@
+  <h1 class="title">Report users</h1>
+  <table class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th style="width: 200px;" scope="col">Institution	</th>
+        <th style="width: 200px;" scope="col">Department</th>
+        <th style="width: 200px;" scope="col">Name</th>
+        <th style="width: 200px;" scope="col">lastname</th>
+        <th style="width: 200px;" scope="col">Symptoms</th>
+        <th style="width: 200px;" scope="col">Covid Positive</th>
+        <th style="width: 200px;" scope="col">Covid Negative</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @reports.each do |report|%>
+          <tr>
+            <td><%= report.user&.departament&.institution&.name%> </td>
+            <td><%= report.user&.departament&.name%> </td> 
+            <td><%= report.user&.full_name%> </td> 
+            <td><%= report.user&.lastname%> </td> 
+            <td><%= report.has_symptoms? ? "X" : ""%> </td>
+            <td><%= report.result ? "X" : ""%> </td> 
+            <td><%= report.result ? "" : "X"%> </td> 
+          </tr>
+      <%end%>
+    </tbody>
+  </table>
+  
