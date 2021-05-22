@@ -5,8 +5,7 @@ class ReportsController < ApplicationController
     @reports = get_reports_by_users(params[:commit])
     respond_to do |format|
       format.html
-      format.json
-      format.csv { send_data @reports.to_csv, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data @reports.to_csv }
       format.pdf { render template: 'reports/docu', pdf: 'docu' }
     end 
   end
@@ -16,8 +15,7 @@ class ReportsController < ApplicationController
     @reports = get_reports_by_places(params[:option], params[:commit])
     respond_to do |format|
       format.html
-      format.json
-      format.csv { send_data @reports.to_csv, filename: "places-#{Date.today}.csv" }
+      format.csv { send_data @reports.to_csv }
       format.pdf { render template: 'reports/docp', pdf: 'docp' }
     end 
   end
