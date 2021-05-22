@@ -22,6 +22,10 @@
       </div>
     </div>	
     <% end %>
+
+    <form action="<%= reports_users_path(format: :pdf) %>" method="get">
+      <button class="btn btn-success btn-sm" type="submit" style="color: #FFFFFF;">Descargar pdf</button>
+    </form>
   </div>
 
   <%= render "report_by_user", attendaces: @reports %>
