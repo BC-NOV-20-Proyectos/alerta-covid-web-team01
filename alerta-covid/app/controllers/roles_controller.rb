@@ -8,7 +8,7 @@ class RolesController < ApplicationController
 
   def index
     #you dont want to set the permissions for Super Admin.
-    @roles = Role.all.map{|i| i if (i.name != "Super Admin") }.compact
+    @roles = Role.all.where.not(name: "Super Admin").paginate(page: params[:page], per_page: 10)
   end
 
   def show

@@ -8,7 +8,7 @@ class PlacesController < ApplicationController
 
   # GET /places or /places.json
   def index
-    @places = Place.all.includes(:area)
+    @places = Place.all.includes(:area).paginate(page: params[:page], per_page: 15)
     @current_institution = current_institution
   end
 

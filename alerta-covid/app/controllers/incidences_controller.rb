@@ -6,7 +6,7 @@ class IncidencesController < ApplicationController
   # GET /incidences or /incidences.json
   def index
     @user = current_user
-    @incidences = @user.incidence
+    @incidences = @user.incidence.paginate(page: params[:page], per_page: 15)
   end
 
   # GET /incidences/1 or /incidences/1.json

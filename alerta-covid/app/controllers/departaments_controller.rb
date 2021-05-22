@@ -8,9 +8,9 @@ class DepartamentsController < ApplicationController
   # GET /departaments or /departaments.json
   def index
     if(current_user.super_admin?)
-      @departaments = Departament.all.includes(:institution).order(:institution_id)
+      @departaments = Departament.all.includes(:institution).order(:institution_id).paginate(page: params[:page], per_page: 15)
     else
-      @departaments = Departament.all.includes(:institution).where(institution_id: current_institution.id)
+      @departaments = Departament.all.includes(:institution).where(institution_id: current_institution.id).paginate(page: params[:page], per_page: 15)
     end
   end
 

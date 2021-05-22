@@ -31,7 +31,11 @@
     </table>
   </div>
 
-  <br>
+  <div class="mt-2 mb-3 col-xs-12">
+    <%= will_paginate(@incidences, :renderer => WillPaginate::ActionView::LinkRenderer, class: 'pagination-sm justify-content-center') %>
+  </div>
 
-  <%= link_to 'New Incidence', new_incidence_path, class: "new-button" %>
+  <div class="mt-2 col-xs-12">
+    <%= link_to 'New Incidence', new_incidence_path, class: "new-button" %>
+  </div> 
 </div>
