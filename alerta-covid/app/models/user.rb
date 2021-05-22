@@ -12,6 +12,18 @@ class User < ApplicationRecord
     self.role.name == "Super Admin"
   end
 
+  def admin_institution?
+    self.role.name == "Admin Institution"
+  end
+
+  def final_user?
+    self.role.name == "Final User"
+  end
+
+  def is_signed_in?
+    true if user_signed_in?
+  end
+
   def has_role?(role_name)
     Role.all.any? {|role| role.name == role_name}
   end
