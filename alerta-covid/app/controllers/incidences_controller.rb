@@ -6,12 +6,12 @@ class IncidencesController < ApplicationController
   # GET /incidences or /incidences.json
   def index
     if(current_user.super_admin?)
-      @incidences = Incidence.all
+      @incidences = Incidence.all.paginate(page: params[:page], per_page: 15)
     elsif(current_user.admin_institution?)
-      @incidences = Incidence.all.select{ |incidence| incidence.user.departament.institution == current_institution }
+      @incidences = Incidence.all.select{ |incidence| incidence.user.departament.institution == current_institution }.paginate(page: params[:page], per_page: 15)
     else
       @user = current_user
-      @incidences = @user.incidence
+      @incidences = @user.incidence.paginate(page: params[:page], per_page: 15)
     end
   end
 

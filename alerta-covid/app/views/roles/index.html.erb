@@ -30,5 +30,11 @@
     </table>
   </div>
 
-  <%= link_to 'New Role', new_role_path, class: "new-button" %>
+  <div class="mt-2 col-xs-12">
+    <%= will_paginate(@roles, :renderer => WillPaginate::ActionView::LinkRenderer, class: 'pagination-sm justify-content-center') %>
+  </div>
+
+  <div class="mt-2 col-xs-12">
+    <%= link_to 'New Role', new_role_path, class: 'new-button' %>
+  </div>
 </div>

@@ -7,9 +7,9 @@ class InstitutionsController < ApplicationController
   # GET /institutions or /institutions.json
   def index
     if(current_user.super_admin?)
-      @institutions = Institution.all
+      @institutions = Institution.all.paginate(page: params[:page], per_page: 15)
     else
-      @institutions = Institution.all.where(id: current_institution.id)
+      @institutions = Institution.all.where(id: current_institution.id).paginate(page: params[:page], per_page: 15)
     end
   end
 

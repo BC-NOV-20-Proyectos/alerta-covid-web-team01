@@ -20,10 +20,14 @@
       <% end %>
     </tbody>
   </table>
-  <br>
+  <div class="mt-2 mb-3 col-xs-12">
+    <%= will_paginate(@institutions, :renderer => WillPaginate::ActionView::LinkRenderer, class: 'pagination-sm justify-content-center') %>
+  </div>
   <%if current_user.super_admin?%>
     <div class="container">
-      <%= link_to 'New Institution', new_institution_path, class: "new-button" %>
+      <div class="mt-2 col-xs-12">
+        <%= link_to 'New Institution', new_institution_path, class: "new-button" %>
+      </div>
     </div>
   <%end%>
 </div>

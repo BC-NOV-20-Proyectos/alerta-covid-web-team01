@@ -32,7 +32,13 @@
     <% end %>
   </div>
 
+  <div class="mt-2 mb-3 col-xs-12">
+    <%= will_paginate(@places, :renderer => WillPaginate::ActionView::LinkRenderer, class: 'pagination-sm justify-content-center') %>
+  </div>
+
   <% if user_signed_in?%>
-    <%= link_to 'New Place', new_place_path, class: "new-button" %>
+    <div class="mt-2 col-xs-12">
+      <%= link_to 'New Place', new_place_path, class: "new-button" %>
+    </div>
   <% end%>
 </div>
