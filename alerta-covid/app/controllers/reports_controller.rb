@@ -4,11 +4,21 @@ class ReportsController < ApplicationController
     authorize! :users, ReportsController
     commit = params[:commit]
     @reports = get_reports_by_users(commit)
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf { render template: 'reports/usersreport', pdf: 'usersreport', layout: 'pdf.html' }
+    end
   end
 
   def places
     authorize! :places, ReportsController
     @reports = get_reports_by_places(params[:option], params[:commit])
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf { render template: 'reports/placesreport', pdf: 'placesreport', layout: 'pdf.html' }
+    end
   end
 
   private
