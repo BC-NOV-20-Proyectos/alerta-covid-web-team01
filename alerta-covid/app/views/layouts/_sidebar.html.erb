@@ -46,7 +46,7 @@
 				<span>My Incidences</span>
 			</a>
 		<% end %>
-		<% if can?(:users, ReportsController) && can?(:places, ReportsController) %>
+		<% if can?(:users, ReportsController) && can?(:places, ReportsController) && !current_user.final_user? %>
 			<div class="dropdown">
 				<button class="btn dropdown-toggle btn-reports side-item" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<i class="fas fa-tasks"></i>

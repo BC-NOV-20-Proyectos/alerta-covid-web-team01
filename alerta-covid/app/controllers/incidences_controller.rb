@@ -5,8 +5,14 @@ class IncidencesController < ApplicationController
 
   # GET /incidences or /incidences.json
   def index
-    @user = current_user
-    @incidences = @user.incidence.paginate(page: params[:page], per_page: 15)
+    if(current_user.super_admin?)
+      @incidences = Incidence.all.paginate(page: params[:page], per_page: 15)
+    elsif(current_user.admin_institution?)
+      @incidences = Incidence.all.select{ |incidence| incidence.user.departament.institution == current_institution }.paginate(page: params[:page], per_page: 15)
+    else
+      @user = current_user
+      @incidences = @user.incidence.paginate(page: params[:page], per_page: 15)
+    end
   end
 
   # GET /incidences/1 or /incidences/1.json
@@ -21,6 +27,7 @@ class IncidencesController < ApplicationController
   def edit
     @user_symptoms = @incidence.symptoms.collect { |p| p.id }
     @user_places = @incidence.places.collect{ |p| p.id }
+    @current_institution = current_institution
   end
 
   # POST /incidences or /incidences.json

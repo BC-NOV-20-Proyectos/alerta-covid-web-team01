@@ -20,7 +20,9 @@ class ApplicationController < ActionController::Base
 
   #load the permissions for the current user so that UI can be manipulated
   def load_permissions
-    @current_permissions = current_user.role.permissions.collect { |i| [i.subject_class, i.action] }
+    if current_user != nil
+      @current_permissions = current_user.role.permissions.collect { |i| [i.subject_class, i.action] }
+    end
   end
   
   def current_institution

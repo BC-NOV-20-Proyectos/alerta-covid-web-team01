@@ -1,7 +1,7 @@
 class PlacesController < ApplicationController
   before_action :set_place, only: %i[ show edit update destroy ]
   
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:index, :show]
   before_action :load_permissions
   before_action :authenticate_user!, except: [:index, :show]
   before_action :get_areas, only: %i[ new edit create]
