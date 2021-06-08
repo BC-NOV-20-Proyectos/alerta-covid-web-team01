@@ -63,9 +63,19 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "alerta_covid_production"
-  config.action_mailer.default_url_options = { host: 'https://alerta-covid.herokuapp.com' }
-
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: 'alerta-covid.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+    :user_name => 'apikey',
+    :password => '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',
+    :domain => 'alerta-covid.herokuapp.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
