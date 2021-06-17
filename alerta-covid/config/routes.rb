@@ -30,7 +30,7 @@ devise_for :users, controllers: { sessions: 'users/sessions',
   resources :areas
   resources :covid_tests
   resources :departaments
-  resources :incidences, except: [:destroy]
+  resources :incidences
   resources :institutions
   resources :places
   resources :roles

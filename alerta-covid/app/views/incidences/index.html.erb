@@ -6,10 +6,12 @@
     <table class="table">
       <thead>
         <tr>
-          <th>type test</th>
+          <th>User</th>
+          <th>Institution</th>
+          <th>Type test</th>
           <th>Open</th>
-          <th>Result</th>
           <th>Close</th>
+          <th>Result</th>
           <th>Symptom</th>
           <th colspan="3">Actions</th>
         </tr>
@@ -18,13 +20,16 @@
       <tbody>
         <% @incidences.each do |incidence| %>
           <tr>
+            <td><%= incidence.user.full_name + " " + incidence.user.lastname%></td>
+            <td><%= incidence.user.departament.institution.name%></td>
             <td><%= incidence.covid_test.name%></td>
             <td><%= time_ago_in_words(incidence.open)%></td>
-            <td><%= !incidence.result.nil? ? incidence.result : "Pending"%></td>
             <td><%= incidence.close ? time_ago_in_words(incidence.close) : "Pending"%></td>
+            <td><%= !incidence.result.nil? ? incidence.result : "Pending"%></td>
             <td><%= incidence.has_symptoms%></td>
             <td><%= link_to 'Show', incidence, class: "btn btn-success" %></td>
             <td><%= link_to 'Update Result', edit_incidence_path(incidence), class: "btn btn-warning" %></td>
+            <td><%= button_to 'Destroy', incidence, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
           </tr>
         <% end %>
       </tbody>

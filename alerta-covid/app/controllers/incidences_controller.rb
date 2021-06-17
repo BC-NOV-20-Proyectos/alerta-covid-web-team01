@@ -8,7 +8,7 @@ class IncidencesController < ApplicationController
     if(current_user.super_admin?)
       @incidences = Incidence.all.paginate(page: params[:page], per_page: 15)
     elsif(current_user.admin_institution?)
-      @incidences = Incidence.all.select{ |incidence| incidence.user.departament.institution == current_institution }.paginate(page: params[:page], per_page: 15)
+      @incidences = Incidence.joins(user: [:departament]).where("institution_id = #{current_institution.id}").paginate(page: params[:page], per_page: 15)
     else
       @user = current_user
       @incidences = @user.incidence.paginate(page: params[:page], per_page: 15)
@@ -52,6 +52,11 @@ class IncidencesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @incidence.destroy
+    redirect_to incidences_url, notice: "Incidence was successfully destroyed."
   end
 
   private
