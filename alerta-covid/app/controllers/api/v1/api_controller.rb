@@ -4,7 +4,7 @@ class Api::V1::ApiController < ActionController::Base
 
   def encode_token(payload)
     payload['exp'] = Time.now.to_i + 4 * 3600
-    JWT.encode(payload, Rails.application.credentials.jwt_secret)
+    JWT.encode(payload, 'JWT1234PASSWORD')
   end
 
   def auth_header
@@ -15,7 +15,7 @@ class Api::V1::ApiController < ActionController::Base
     if auth_header
       token = auth_header.split('Bearer ')[1]
       begin
-        JWT.decode(token, Rails.application.credentials.jwt_secret, true, algorithm: 'HS256', exp_leeway: 30)
+        JWT.decode(token, 'JWT1234PASSWORD', true, algorithm: 'HS256', exp_leeway: 30)
       rescue JWT::DecodeError, JWT::ExpiredSignature, JWT::VerificationError
         nil
       end
